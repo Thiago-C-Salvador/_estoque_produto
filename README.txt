@@ -13,3 +13,5 @@ Uma vez o banco de dados criado e rodando, então importe o arquivo de flows do 
 Por fim, instale um "editor de código de desenvolvimento. Um dos mais recomendados e usado devido a facilidade de se trabalhar com extensões e pela levaza quanto consumo de processamento da máquina é o Visual Studio.
 
 Pronto!
+
+Aaah, mas claro que não é um sistema pronto, é um sitema em que eu fiz uso do conhecimento adquirido e de muita busca po conhecimento e exemplos durante o desenvovimento desse projeto, que se for olhar pelo ponto de vista de um sitema completa: ainda etá longe, mas a ideia aqui não é postar um sistema completa, mas sim poder compartilhar conhecimentos e mostar minha forma de trabalhar e minha lógica de raciocínio. Contudo, pretendo sim ir dar continuidade ao desenvolvimento desse sistema com novas funções, telas etc; porém, não sei se continuarei em JS puro ou se passerei tudo para Type e daí partir para a cuntinuidade. Talvez, até mesmo passando o bakcend para PHP8.
