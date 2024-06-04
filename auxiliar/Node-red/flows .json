@@ -1,0 +1,3875 @@
+[
+    {
+        "id": "6b6a763a1eaa71a8",
+        "type": "tab",
+        "label": "Estoque - Usuarios",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2cb7011b0b97cc39",
+        "type": "tab",
+        "label": "Estoque - Fornecedor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "25c58c8ddc352842",
+        "type": "tab",
+        "label": "Estoque - Produtos",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "76f53d9606de16d1",
+        "type": "tab",
+        "label": "Estoque - Token",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d9609e713e0fd72c",
+        "type": "tab",
+        "label": "Estoque - Login",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "39f36fb0d7fef4cf",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "curso-javascript",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "adfedc151ec78d8c",
+        "type": "MySQLdatabase",
+        "name": "Agenda telefonica",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "agenda_contatos_js",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "05bd3651b00a2450",
+        "type": "MySQLdatabase",
+        "name": "Controle Estoque",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "estoque",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "ac864e2d258958b4",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Todos Colaboradores Ativos",
+        "url": "/todosUsuariosAtivos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "5d29ace65af3cd38"
+            ]
+        ]
+    },
+    {
+        "id": "410720624e5c8843",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7698df9ad005264e",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 640,
+        "y": 40,
+        "wires": [
+            [
+                "410720624e5c8843"
+            ]
+        ]
+    },
+    {
+        "id": "c67a8ddb236c3d79",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Nível Colaborador",
+        "url": "/nivelUsuarios",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "8d7e56dbef20484f"
+            ]
+        ]
+    },
+    {
+        "id": "8d7e56dbef20484f",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Select table nivel_usuario",
+        "func": "msg.topic = \"SELECT * FROM  nivel_usuario\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "f817d395659fe84f"
+            ]
+        ]
+    },
+    {
+        "id": "f817d395659fe84f",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 160,
+        "wires": [
+            [
+                "797b8c10be944bbd"
+            ]
+        ]
+    },
+    {
+        "id": "797b8c10be944bbd",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "33d26514dab8d56e",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Novo Colaborador",
+        "url": "/novoUsuario",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "7c73ef2df781b7c3"
+            ]
+        ]
+    },
+    {
+        "id": "7c73ef2df781b7c3",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Cadastra Colab - telefone",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst s_nomeUsuario = msg.payload.s_nome;\nconst s_nameUser = msg.payload.s_user_name;\nconst id_nivelUsuario = msg.payload.id_nivel_usuario;\nconst statusUsuario = msg.payload.c_status_usuario;\nconst foto = msg.payload.s_foto_usuario;\nmsg.s_numero_telefone = msg.payload.s_numero_telefone;\n\nconst query = \n`INSERT INTO usuario (id_usuario, s_nome, s_user_name, s_pass_user, id_t_nivelUsuario, c_status_usuario, s_foto_usuario) \nvalues (NULL, '${s_nomeUsuario}', '${s_nameUser}', '' , ${id_nivelUsuario}, '${statusUsuario}', '${foto}')`\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "d8977850a22e2e2a"
+            ]
+        ]
+    },
+    {
+        "id": "439ff30636b6c480",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "d49f97f46247ad58"
+            ]
+        ]
+    },
+    {
+        "id": "d49f97f46247ad58",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1030,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3ba51483f0a0c0c3",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Telefones",
+        "func": "\nconst  id_t_usuario = msg.payload.insertId;    \nlet numeros_telefone = msg.s_numero_telefone;\nlet procesamento_num_telefone = \"\";\n\nnumeros_telefone.forEach((telefone) => {\n    \n    procesamento_num_telefone += `, (NULL, ${id_t_usuario}, '${telefone}')`\n});\n\nprocesamento_num_telefone = procesamento_num_telefone.substring(1);\n\nconst query = `INSERT INTO telefone_colaborador (id_telefone, id_t_usuario, s_numero_telefone) \nVALUES ${procesamento_num_telefone}`;\n\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 220,
+        "wires": [
+            [
+                "439ff30636b6c480"
+            ]
+        ]
+    },
+    {
+        "id": "d8977850a22e2e2a",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "3ba51483f0a0c0c3"
+            ]
+        ]
+    },
+    {
+        "id": "62bc0f4c066a61aa",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Selecionar Colaborador",
+        "url": "/colaboradorSelecionado/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "c5543c9cb96ee6d8"
+            ]
+        ]
+    },
+    {
+        "id": "0bd59dc3cfaf70ad",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c5543c9cb96ee6d8",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Select colaborador by ID",
+        "func": "msg.topic = `SELECT * FROM usuario WHERE id_usuario = ${msg.req.params.id}`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "56bb064447f7bdcd"
+            ]
+        ]
+    },
+    {
+        "id": "56bb064447f7bdcd",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 280,
+        "wires": [
+            [
+                "0bd59dc3cfaf70ad"
+            ]
+        ]
+    },
+    {
+        "id": "f3e8e326b408de85",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "get Telefones",
+        "url": "/recuperarTelefones/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "a5f4b300f8496214"
+            ]
+        ]
+    },
+    {
+        "id": "21ee699acc4f67a6",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a5f4b300f8496214",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Select table telefone_colaborador",
+        "func": "msg.topic = `SELECT * FROM telefone_colaborador WHERE id_t_usuario = ${msg.req.params.id}`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "0308e1df4f752c50"
+            ]
+        ]
+    },
+    {
+        "id": "0308e1df4f752c50",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 340,
+        "wires": [
+            [
+                "21ee699acc4f67a6"
+            ]
+        ]
+    },
+    {
+        "id": "baddff48ebad1082",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Atualizar Colaborador",
+        "url": "atualizaColaborador",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "26f8cbd39d84e191"
+            ]
+        ]
+    },
+    {
+        "id": "26f8cbd39d84e191",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Atualiza Colab *telefone",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.id_colaborador = msg.payload.id_colaborador;\nconst s_nomeUsuario = msg.payload.s_nome;\nconst s_nameUser = msg.payload.s_user_name;\nconst id_nivelUsuario = msg.payload.id_nivel_usuario;\nconst statusUsuario = msg.payload.c_status_usuario;\nconst foto = msg.payload.s_foto_usuario;\n\nmsg.s_numero_telefone_novo = msg.payload.s_num_telefone_novo;\nmsg.s_num_telefone_deletado = msg.payload.s_num_telefone_deletado;\n\nmsg.s_num_telefone_atualizado = msg.payload.s_num_telefone_atualizado;\nmsg.id_tel_atualizado = msg.payload.id_numero_atualizado;\n\nconst query = \n`UPDATE usuario SET s_nome='${s_nomeUsuario}', s_user_name='${s_nameUser}', id_t_nivelUsuario=${id_nivelUsuario}, c_status_usuario='${statusUsuario}', s_foto_usuario='${foto}' \nWHERE id_usuario = ${msg.id_colaborador}`\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "f31d7a71e13e0602"
+            ]
+        ]
+    },
+    {
+        "id": "671c157c5690156c",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1190,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "5161fb9d05b4bb7d",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Novo tel",
+        "func": "let numeros_telefone = msg.s_numero_telefone_novo;\nlet montagem_string = \"\";\n\nnumeros_telefone.forEach((telefone) => \n{\n    montagem_string += `,(NULL,${msg.id_colaborador},'${telefone}')`;\n});\n\nmontagem_string = montagem_string.substring(1);\n\nconst query = `INSERT INTO telefone_colaborador (id_telefone, id_t_usuario, s_numero_telefone) VALUES ${montagem_string}`;\n\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "fec5d517e7a41d87"
+            ]
+        ]
+    },
+    {
+        "id": "f31d7a71e13e0602",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "c61d8f27c6cf7216"
+            ]
+        ]
+    },
+    {
+        "id": "89b921622f5a0b0c",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Atualiza Status Colab",
+        "url": "/alteraStatusColaborador",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "c6853b75adcf7101"
+            ]
+        ]
+    },
+    {
+        "id": "c6853b75adcf7101",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Atualiza status (I/A)",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst query = `UPDATE usuario SET c_status_usuario = '${msg.payload.c_status}' WHERE id_usuario = ${msg.payload.coluna_id}`;\nmsg.topic= query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 680,
+        "wires": [
+            [
+                "a3d7db24e63410e9"
+            ]
+        ]
+    },
+    {
+        "id": "c61d8f27c6cf7216",
+        "type": "switch",
+        "z": "6b6a763a1eaa71a8",
+        "name": "novo Tel",
+        "property": "msg.s_numero_telefone_novo",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 100,
+        "y": 460,
+        "wires": [
+            [
+                "73ce1724fb52a628"
+            ],
+            [
+                "5161fb9d05b4bb7d"
+            ]
+        ]
+    },
+    {
+        "id": "c4aef1b0f4651c97",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Deletar colab",
+        "func": "let string_montada = \"\";\n\nmsg.s_num_telefone_deletado.forEach(function(element) {\n    string_montada += `,${element}`;\n});\n\nstring_montada = string_montada.substring(1)\n\nconst query = `DELETE FROM telefone_colaborador WHERE id_telefone in (${string_montada})`;\nmsg.topic = query\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "3a31c0c1bea93178"
+            ]
+        ]
+    },
+    {
+        "id": "73ce1724fb52a628",
+        "type": "switch",
+        "z": "6b6a763a1eaa71a8",
+        "name": "deletar Tel",
+        "property": "msg.s_num_telefone_deletado",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 460,
+        "wires": [
+            [
+                "8fd648dbcba4c6d4"
+            ],
+            [
+                "c4aef1b0f4651c97"
+            ]
+        ]
+    },
+    {
+        "id": "fec5d517e7a41d87",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 420,
+        "y": 480,
+        "wires": [
+            [
+                "73ce1724fb52a628"
+            ]
+        ]
+    },
+    {
+        "id": "3a31c0c1bea93178",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 300,
+        "y": 560,
+        "wires": [
+            [
+                "8fd648dbcba4c6d4"
+            ]
+        ]
+    },
+    {
+        "id": "c2a3ca58e6a61a74",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Atualiza Num",
+        "func": "let codigos = \"\";\nlet string_montada = \"\";\n\nmsg.id_tel_atualizado.forEach(function(id, index)\n{\n    string_montada += `WHEN ${id} THEN \"${msg.s_num_telefone_atualizado[index]}\" `;\n    codigos += `,${id}`;\n});\n\ncodigos = codigos.substring(1);\nconst query = `UPDATE telefone_colaborador SET s_numero_telefone = CASE id_telefone ${string_montada}END WHERE id_telefone IN (${codigos})`;\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 580,
+        "wires": [
+            [
+                "7ac4be016710062c"
+            ]
+        ]
+    },
+    {
+        "id": "8fd648dbcba4c6d4",
+        "type": "switch",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Tel atualizado",
+        "property": "msg.id_tel_atualizado",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 860,
+        "y": 500,
+        "wires": [
+            [
+                "671c157c5690156c"
+            ],
+            [
+                "c2a3ca58e6a61a74"
+            ]
+        ]
+    },
+    {
+        "id": "7ac4be016710062c",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 1060,
+        "y": 520,
+        "wires": [
+            [
+                "671c157c5690156c"
+            ]
+        ]
+    },
+    {
+        "id": "a3d7db24e63410e9",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 680,
+        "wires": [
+            [
+                "b920fd5839efcc18"
+            ]
+        ]
+    },
+    {
+        "id": "b920fd5839efcc18",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "7e67f320a362cdaa",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Ultimo ID",
+        "url": "/ultimoID",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 740,
+        "wires": [
+            [
+                "c97abf73e4645342"
+            ]
+        ]
+    },
+    {
+        "id": "c97abf73e4645342",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "function 20",
+        "func": "msg.topic = `SELECT * FROM usuario WHERE id_usuario = (SELECT MAX(id_usuario) FROM usuario)`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 740,
+        "wires": [
+            [
+                "d0349af1a002bb08"
+            ]
+        ]
+    },
+    {
+        "id": "d0349af1a002bb08",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 420,
+        "y": 740,
+        "wires": [
+            [
+                "13ed18b7e8e056cb"
+            ]
+        ]
+    },
+    {
+        "id": "13ed18b7e8e056cb",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "0c59d9758db66ee0",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Exibir contatos Colaborador",
+        "url": "/contatoColaborador/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 620,
+        "wires": [
+            [
+                "04afd5ec5b42bb33"
+            ]
+        ]
+    },
+    {
+        "id": "34d51e0ba1ca5e6c",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "04afd5ec5b42bb33",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Seletc colaborador",
+        "func": "const query =\n`START TRANSACTION;\nSELECT s_nome, s_foto_usuario from usuario WHERE id_usuario = ${ msg.req.params.id };\nSELECT s_numero_telefone from telefone_colaborador WHERE id_t_usuario = ${ msg.req.params.id };\nCOMMIT;`\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 620,
+        "wires": [
+            [
+                "8e502c1e31554374"
+            ]
+        ]
+    },
+    {
+        "id": "8e502c1e31554374",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 620,
+        "wires": [
+            [
+                "34d51e0ba1ca5e6c"
+            ]
+        ]
+    },
+    {
+        "id": "5d29ace65af3cd38",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Select table colaboradores",
+        "func": "msg.topic = \"SELECT * FROM usuario where c_status_usuario='A'\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 40,
+        "wires": [
+            [
+                "7698df9ad005264e"
+            ]
+        ]
+    },
+    {
+        "id": "f417017bae1e31f2",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Todos Colaboradores Cadastrados",
+        "url": "/todosUsuariosCadastrados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "1d94bd843bcddd0d"
+            ]
+        ]
+    },
+    {
+        "id": "e8341795eda5a911",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "5a6dfb657456cdd2",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "e8341795eda5a911"
+            ]
+        ]
+    },
+    {
+        "id": "1d94bd843bcddd0d",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Select table colaboradores",
+        "func": "msg.topic = \"SELECT * FROM usuario\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "5a6dfb657456cdd2"
+            ]
+        ]
+    },
+    {
+        "id": "c5ee420dda313629",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Deletar Usuario",
+        "url": "/deletarUsuario/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 800,
+        "wires": [
+            [
+                "cf6e4785b1e31934"
+            ]
+        ]
+    },
+    {
+        "id": "cf6e4785b1e31934",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "function 22",
+        "func": "msg.topic = \n`START TRANSACTION;\nDELETE FROM telefone_colaborador WHERE id_t_usuario = ${msg.req.params.id};\nDELETE FROM usuario WHERE id_usuario = ${msg.req.params.id};\nCOMMIT;`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 800,
+        "wires": [
+            [
+                "268c6693dea2dc2d"
+            ]
+        ]
+    },
+    {
+        "id": "268c6693dea2dc2d",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 460,
+        "y": 800,
+        "wires": [
+            [
+                "fafdfb19e8d683e7"
+            ]
+        ]
+    },
+    {
+        "id": "fafdfb19e8d683e7",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 610,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "70fb73fb02301df1",
+        "type": "http in",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Permissao Usuario",
+        "url": "/nivelPermissao",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 860,
+        "wires": [
+            [
+                "9b2bd3e9363d688a"
+            ]
+        ]
+    },
+    {
+        "id": "9b2bd3e9363d688a",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Veririfica nivel",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.id_usuario = msg.payload.s_id_usuario;\nmsg.s_usuario_nome = msg.payload.s_usuario_nome;\nmsg.s_descricao_nivel = msg.payload.s_descricao_nivel\nmsg.topic = \n`SELECT id_usuario, id_t_nivelUsuario FROM usuario \n WHERE s_nome = '${msg.s_usuario_nome}' AND id_usuario = ${msg.id_usuario}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 860,
+        "wires": [
+            [
+                "e7ec1603efd2bf67"
+            ]
+        ]
+    },
+    {
+        "id": "e7ec1603efd2bf67",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 100,
+        "y": 920,
+        "wires": [
+            [
+                "b9c14dca3496c94c"
+            ]
+        ]
+    },
+    {
+        "id": "c977699bf0c18752",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1080,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "b9c14dca3496c94c",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "verifica dados do colab",
+        "func": "msg.topic = \n`SELECT n_nivel FROM nivel_usuario \nWHERE id_nivel_usuario = ${msg.payload[0].id_t_nivelUsuario}\nAND s_desc_usuario = '${msg.s_descricao_nivel}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 920,
+        "wires": [
+            [
+                "acf69228411cca32"
+            ]
+        ]
+    },
+    {
+        "id": "acf69228411cca32",
+        "type": "mysql",
+        "z": "6b6a763a1eaa71a8",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 500,
+        "y": 920,
+        "wires": [
+            [
+                "1fcede10263408c4"
+            ]
+        ]
+    },
+    {
+        "id": "1fcede10263408c4",
+        "type": "switch",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Tem retorno ou noa",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 920,
+        "wires": [
+            [
+                "384ba37ed70f66ac"
+            ],
+            [
+                "b70774d27c645e6a"
+            ]
+        ]
+    },
+    {
+        "id": "19e3f5fbb93a7dfa",
+        "type": "http response",
+        "z": "6b6a763a1eaa71a8",
+        "name": "",
+        "statusCode": "209",
+        "headers": {},
+        "x": 1080,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "384ba37ed70f66ac",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Exclui retornos",
+        "func": "delete(msg.topic);\ndelete(msg.id_usuario);\ndelete(msg.s_usuario_nome);\ndelete(msg.s_descricao_nivel);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 900,
+        "wires": [
+            [
+                "c977699bf0c18752",
+                "2d9be956a51ab479"
+            ]
+        ]
+    },
+    {
+        "id": "b70774d27c645e6a",
+        "type": "function",
+        "z": "6b6a763a1eaa71a8",
+        "name": "Exclui retornos",
+        "func": "msg.payload = [{retorno: 209}];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 940,
+        "wires": [
+            [
+                "19e3f5fbb93a7dfa",
+                "084a2925334c73b8"
+            ]
+        ]
+    },
+    {
+        "id": "084a2925334c73b8",
+        "type": "debug",
+        "z": "6b6a763a1eaa71a8",
+        "name": "debug 21",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "2d9be956a51ab479",
+        "type": "debug",
+        "z": "6b6a763a1eaa71a8",
+        "name": "debug 22",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0f5ce656044b4fa4",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Novo Fornecedor",
+        "url": "/novoFornecedor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "19e10964c6c96182"
+            ]
+        ]
+    },
+    {
+        "id": "19e10964c6c96182",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Cadastra Fornec - telefone",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst s_nome_empresa = msg.payload.s_nome_empresa;\nconst s_nome_representante = msg.payload.s_nome_representante;\nconst c_status = msg.payload.c_status_cadastro;\n\nmsg.s_num_empresa = msg.payload.s_contatos_empresa;\nmsg.s_num_representante = msg.payload.s_contatos_representante;\n\nconst query = \n`INSERT INTO fornecedor (id_fornecedor, s_nome_empresa, s_nome_representante, c_status) \nVALUES (NULL, '${s_nome_empresa}', '${s_nome_representante}', '${c_status}')`;\n\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "b22253130f7c5835"
+            ]
+        ]
+    },
+    {
+        "id": "5a4f6c498d2eb204",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 900,
+        "y": 180,
+        "wires": [
+            [
+                "ec369c5094bfe806"
+            ]
+        ]
+    },
+    {
+        "id": "ec369c5094bfe806",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "467e1230070d0fdd",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Telefones",
+        "func": "\nconst  id_t_fornecedor = msg.payload.insertId;\nlet procesamento_num_empresa = \"\";\nlet procesamento_num_representante = \"\";\n\nmsg.s_num_empresa.forEach((telefone) => {\n    procesamento_num_empresa += `, (NULL, ${id_t_fornecedor}, '${telefone}')`\n});\nprocesamento_num_empresa = procesamento_num_empresa.substring(1);\n\nmsg.s_num_representante.forEach((telefone) => {\n  procesamento_num_representante += `, (NULL, ${id_t_fornecedor}, '${telefone}')`\n});\nprocesamento_num_representante = procesamento_num_representante.substring(1);\n\nconst query = \n`START TRANSACTION;\nINSERT INTO telefone_fornecedor (id_telefone, id_t_fornecedor, s_num_telefone) VALUES ${procesamento_num_empresa};\nINSERT INTO telefone_representante (id_telefone, id_t_fornecedor, s_num_telefone) VALUES ${procesamento_num_representante};\nCOMMIT;`\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "5a4f6c498d2eb204"
+            ]
+        ]
+    },
+    {
+        "id": "b22253130f7c5835",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "467e1230070d0fdd"
+            ]
+        ]
+    },
+    {
+        "id": "982b4b80f55199af",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Atualiza Status Fornec",
+        "url": "/alteraStatusFornecedor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "88fee5501b394582"
+            ]
+        ]
+    },
+    {
+        "id": "88fee5501b394582",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Atualiza status (I/A)",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst query = `UPDATE fornecedor SET c_status = '${msg.payload.c_status}' WHERE id_fornecedor = ${msg.payload.coluna_id}`;\nmsg.topic= query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "d9e008093049a8a7"
+            ]
+        ]
+    },
+    {
+        "id": "d9e008093049a8a7",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 240,
+        "wires": [
+            [
+                "b12663312931bdc4"
+            ]
+        ]
+    },
+    {
+        "id": "b12663312931bdc4",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "b3e9e1fdf3fd626b",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Todos fornecedores Ativos",
+        "url": "/todosFornecedoresAtivos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "27b9495bb1df83e1"
+            ]
+        ]
+    },
+    {
+        "id": "5cc5588aecf3dcfd",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "27b9495bb1df83e1",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = \"SELECT * FROM `fornecedor`, `telefone_fornecedor` WHERE c_status='A' AND id_fornecedor = id_t_fornecedor\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 60,
+        "wires": [
+            [
+                "8757fcf333fc5547"
+            ]
+        ]
+    },
+    {
+        "id": "8757fcf333fc5547",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 60,
+        "wires": [
+            [
+                "5cc5588aecf3dcfd"
+            ]
+        ]
+    },
+    {
+        "id": "741f6d3f97addc40",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Dados representante",
+        "url": "/representante/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "fa1bcb448c555482"
+            ]
+        ]
+    },
+    {
+        "id": "308f7fbda3abc302",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fa1bcb448c555482",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Seletc table representante",
+        "func": "const query =\n`START TRANSACTION;\nSELECT s_nome_representante from fornecedor WHERE id_fornecedor = ${ msg.req.params.id };\nSELECT s_num_telefone from telefone_representante WHERE id_t_fornecedor = ${ msg.req.params.id };\nCOMMIT;`\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "0c1aee3d59220767"
+            ]
+        ]
+    },
+    {
+        "id": "0c1aee3d59220767",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "308f7fbda3abc302"
+            ]
+        ]
+    },
+    {
+        "id": "3a0d8174121b44df",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d4367348cd6a1f89",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Select fornecedor by ID",
+        "func": "\nconst query =\n`START TRANSACTION;\nSELECT * from fornecedor WHERE id_fornecedor = ${ msg.req.params.id };\nSELECT id_telefone, s_num_telefone from telefone_fornecedor WHERE id_t_fornecedor = ${ msg.req.params.id };\nSELECT id_telefone, s_num_telefone from telefone_representante WHERE id_t_fornecedor = ${ msg.req.params.id };\nCOMMIT;`;\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "a006bff12015ee77"
+            ]
+        ]
+    },
+    {
+        "id": "a006bff12015ee77",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 360,
+        "wires": [
+            [
+                "3a0d8174121b44df"
+            ]
+        ]
+    },
+    {
+        "id": "58293ff7a445b07e",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Selecionar Fornecedor",
+        "url": "/fornecedorSelecionado/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "d4367348cd6a1f89"
+            ]
+        ]
+    },
+    {
+        "id": "63c7f4b933df7c7f",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Editar Fornecedor",
+        "url": "/editarFornecedor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "e465df162f3a3171"
+            ]
+        ]
+    },
+    {
+        "id": "e465df162f3a3171",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Update fornecedor",
+        "func": "msg.payload = JSON.parse(msg.payload);\n\nlet query =\n`START TRANSACTION;\nUPDATE fornecedor SET s_nome_empresa='${msg.payload.s_nome_empresa}', s_nome_representante='${msg.payload.s_nome_representante}', c_status='${msg.payload.c_status}' WHERE id_fornecedor = ${msg.payload.id_fornecedor};`;\n\n//tratamento query para inserção de novo contato (tanto fornecedor quanto representante)\nif (msg.payload.s_contato_novo.length == 1) {\n    query += `INSERT INTO telefone_fornecedor(id_telefone, id_t_fornecedor, s_num_telefone) VALUES (NULL, ${msg.payload.id_fornecedor}, '${msg.payload.s_contato_novo}');`;\n}\n\nif (msg.payload.s_contato_novo.length == 2 && msg.payload.s_contato_novo[0] == \"\" )\n{\n    query += `INSERT INTO telefone_representante(id_telefone, id_t_fornecedor, s_num_telefone) VALUES (NULL, ${msg.payload.id_fornecedor}, '${msg.payload.s_contato_novo[1]}');`;\n}\n\nif (msg.payload.s_contato_novo.length == 2 && msg.payload.s_contato_novo[0] !== \"\") {\n    query += `INSERT INTO telefone_fornecedor(id_telefone, id_t_fornecedor, s_num_telefone) VALUES (NULL, ${msg.payload.id_fornecedor}, '${msg.payload.s_contato_novo[0]}');`;\n    query += `INSERT INTO telefone_representante(id_telefone, id_t_fornecedor, s_num_telefone) VALUES (NULL, ${msg.payload.id_fornecedor}, '${msg.payload.s_contato_novo[1]}');`;\n}\n//fim tratamento query para inserção de novo contato\n\n//tratamento query para alteração de contato do fornecedor\n\nif (msg.payload.s_contato_alterado_forn.length > 0)\n{\n    let string_montada = \"\";\n    let codigos = \"\";\n    msg.payload.s_contato_alterado_forn.forEach(function (telefone) {\n        string_montada += `WHEN ${telefone[1]} THEN \"${telefone[0]}\" `;\n        codigos += `,${telefone[1]}`;\n    });\n\n    codigos = codigos.substring(1);\n    query += `UPDATE telefone_fornecedor SET s_num_telefone = CASE id_telefone ${string_montada}END WHERE id_telefone IN (${codigos});`;\n}\n\n\nif (msg.payload.s_contato_alterado_rep.length > 0) {\n    let string_montada = \"\";\n    let codigos = \"\";\n    msg.payload.s_contato_alterado_rep.forEach(function (telefone) {\n        string_montada += `WHEN ${telefone[1]} THEN \"${telefone[0]}\" `;\n        codigos += `,${telefone[1]}`;\n    });\n\n    codigos = codigos.substring(1);\n    query += `UPDATE telefone_representante SET s_num_telefone = CASE id_telefone ${string_montada}END WHERE id_telefone IN (${codigos});`;\n}\n\n//tratamento query para exclusaõ número contato (tanto fornecedor quanto representante)\nif (msg.payload.s_contato_excluido.length == 1) {\n    query += `DELETE FROM telefone_fornecedor WHERE id_telefone= ${msg.payload.s_contato_excluido};`;\n}\n\nif (msg.payload.s_contato_excluido.length == 2 && msg.payload.s_contato_excluido[0] == \"\")\n{\n    query += `DELETE FROM telefone_representante WHERE id_telefone= ${msg.payload.s_contato_excluido[1]};`\n}\n\nif (msg.payload.s_contato_excluido.length == 2 && msg.payload.s_contato_excluido[0] !== \"\") {\n    query += `DELETE FROM telefone_fornecedor WHERE id_telefone= ${msg.payload.s_contato_excluido[0]};`\n    query += `DELETE FROM telefone_representante WHERE id_telefone= ${msg.payload.s_contato_excluido[1]};`\n}\n//fim tratamento query para exclusão de contato\n\nquery += `COMMIT;`;\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 420,
+        "wires": [
+            [
+                "70ad6d2099dcea52"
+            ]
+        ]
+    },
+    {
+        "id": "d6dd4061d8d6da07",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "70ad6d2099dcea52",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "d6dd4061d8d6da07"
+            ]
+        ]
+    },
+    {
+        "id": "25b292c91365a1ea",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Todos fornecedores Cadastrados",
+        "url": "/todosFornecedoresCadastrados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "ad22fa4e5df42fa4"
+            ]
+        ]
+    },
+    {
+        "id": "e0a6c453248c848f",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ad22fa4e5df42fa4",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = \"SELECT * FROM `fornecedor`, `telefone_fornecedor` WHERE id_fornecedor = id_t_fornecedor\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "a65db0cddafcc6a4"
+            ]
+        ]
+    },
+    {
+        "id": "a65db0cddafcc6a4",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "e0a6c453248c848f"
+            ]
+        ]
+    },
+    {
+        "id": "f984bc72cf1bfe70",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Deletar Fornecedor",
+        "url": "/deletarFornecedor/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "dc97ccb3538a7635"
+            ]
+        ]
+    },
+    {
+        "id": "dc97ccb3538a7635",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "Deletar fornecedor",
+        "func": "msg.topic =\n`START TRANSACTION;\nDELETE FROM telefone_fornecedor WHERE id_t_fornecedor = ${msg.req.params.id};\nDELETE FROM telefone_representante WHERE id_t_fornecedor = ${msg.req.params.id};\nDELETE FROM fornecedor WHERE id_fornecedor = ${msg.req.params.id};\nCOMMIT;`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 480,
+        "wires": [
+            [
+                "45571ce20caa3329"
+            ]
+        ]
+    },
+    {
+        "id": "074320636834594e",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "45571ce20caa3329",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "074320636834594e"
+            ]
+        ]
+    },
+    {
+        "id": "24cc9c4193751830",
+        "type": "http in",
+        "z": "2cb7011b0b97cc39",
+        "name": "Verifica existência fornec",
+        "url": "/verificaExistenciaFornec",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "b2c8f3544cc9c0b0"
+            ]
+        ]
+    },
+    {
+        "id": "3aaf2dd152ef9911",
+        "type": "mysql",
+        "z": "2cb7011b0b97cc39",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "e78750985d51f24b"
+            ]
+        ]
+    },
+    {
+        "id": "b2c8f3544cc9c0b0",
+        "type": "function",
+        "z": "2cb7011b0b97cc39",
+        "name": "query busca nome",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.topic = `SELECT id_fornecedor FROM fornecedor WHERE s_nome_empresa = '${msg.payload.s_nome_empresa}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 540,
+        "wires": [
+            [
+                "3aaf2dd152ef9911"
+            ]
+        ]
+    },
+    {
+        "id": "8c79cf733baa7092",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 960,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e78750985d51f24b",
+        "type": "switch",
+        "z": "2cb7011b0b97cc39",
+        "name": "Verifica se existe",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 540,
+        "wires": [
+            [
+                "f302f4368d60d58d"
+            ],
+            [
+                "8c79cf733baa7092"
+            ]
+        ]
+    },
+    {
+        "id": "f302f4368d60d58d",
+        "type": "http response",
+        "z": "2cb7011b0b97cc39",
+        "name": "",
+        "statusCode": "209",
+        "headers": {},
+        "x": 960,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "cebc0d4e3c498e9b",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Classes Produto",
+        "url": "/classeProduto",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "ca0c6dfdbeaafae9"
+            ]
+        ]
+    },
+    {
+        "id": "ca0c6dfdbeaafae9",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Select table nivel_usuario",
+        "func": "msg.topic = \"SELECT * FROM  classe_produto\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "de331f7856ecdacd"
+            ]
+        ]
+    },
+    {
+        "id": "de331f7856ecdacd",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 60,
+        "wires": [
+            [
+                "f94be763ed4d968d"
+            ]
+        ]
+    },
+    {
+        "id": "f94be763ed4d968d",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "194d048c3dcc0d38",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Fornecedores",
+        "url": "/idNomeFornecedoresAtivos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "8e3cb88727a99a83"
+            ]
+        ]
+    },
+    {
+        "id": "f172204bd65a3005",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8e3cb88727a99a83",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = \"SELECT id_fornecedor, s_nome_empresa FROM `fornecedor` WHERE c_status = 'A'\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "137835ef3a784a3d"
+            ]
+        ]
+    },
+    {
+        "id": "137835ef3a784a3d",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 520,
+        "y": 120,
+        "wires": [
+            [
+                "f172204bd65a3005"
+            ]
+        ]
+    },
+    {
+        "id": "0590a702dc05a8cf",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Novo Produto",
+        "url": "/novoProduto",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "357e1882ed827acf"
+            ]
+        ]
+    },
+    {
+        "id": "357e1882ed827acf",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Cadastra Produto",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst n_codigo_produto = msg.payload.n_codigo_produto;\nconst n_qnt_produto = msg.payload.n_qnt_produto;\nconst s_descricao_produto = msg.payload.s_desc_produto;\nconst id_t_classe_produto = msg.payload.id_classe_produto;\nconst c_status_produto = msg.payload.c_status_produto;\nconst id_t_fornecedor = msg.payload.id_t_fornecedor;\nconst s_foto_produto = msg.payload.s_foto_produto;\n\nconst query = \n`INSERT INTO produto (n_codigo_produto, id_t_classe_produto, s_descricao_produto, n_qnt_produto, id_t_fornecedor, c_status_produto, s_foto_produto) \nVALUES (${n_codigo_produto}, ${id_t_classe_produto}, '${s_descricao_produto}', ${n_qnt_produto}, ${id_t_fornecedor},'${c_status_produto}', '${s_foto_produto}' )`;\n\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "1d3bf0770fa7ba4b"
+            ]
+        ]
+    },
+    {
+        "id": "bd18e28b67b0ee90",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1d3bf0770fa7ba4b",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "bd18e28b67b0ee90"
+            ]
+        ]
+    },
+    {
+        "id": "2890b911c0ec0f82",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Todos produtos Cadastrados",
+        "url": "/todosProdutosCadastrados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "214602baa816e5a2"
+            ]
+        ]
+    },
+    {
+        "id": "de5b6cfef759fba7",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "214602baa816e5a2",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = `SELECT * FROM produto, classe_produto \nWHERE id_t_classe_produto = id_classe\nORDER BY (CONVERT(n_codigo_produto, DECIMAL)) ASC`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "03d805b58916cfa8"
+            ]
+        ]
+    },
+    {
+        "id": "03d805b58916cfa8",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 620,
+        "y": 300,
+        "wires": [
+            [
+                "de5b6cfef759fba7"
+            ]
+        ]
+    },
+    {
+        "id": "ba4125b77c3ce719",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Todos produtos Ativos",
+        "url": "/todosProdutosAtivos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "559298667f1a7ee0"
+            ]
+        ]
+    },
+    {
+        "id": "b07d2967ec20ccc7",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "559298667f1a7ee0",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table produto",
+        "func": "msg.topic = `\nSELECT * FROM produto, classe_produto \nWHERE c_status_produto = 'A' AND id_t_classe_produto = id_classe \nORDER BY(CONVERT(n_codigo_produto, DECIMAL)) ASC`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "30f32fd71e619810"
+            ]
+        ]
+    },
+    {
+        "id": "30f32fd71e619810",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [
+                "b07d2967ec20ccc7"
+            ]
+        ]
+    },
+    {
+        "id": "8a62bbaf6ec096b2",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Atualiza Status Produto",
+        "url": "/alteraStatusProduto",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "9b0e1b6e75f291e0"
+            ]
+        ]
+    },
+    {
+        "id": "9b0e1b6e75f291e0",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Atualiza status (I/A)",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst query = `UPDATE produto SET c_status_produto = '${msg.payload.c_status}' WHERE n_codigo_produto = ${msg.payload.coluna_id}`;\nmsg.topic= query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "d8ab19afaf6a6704"
+            ]
+        ]
+    },
+    {
+        "id": "d8ab19afaf6a6704",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "ee1270b47f435e5c"
+            ]
+        ]
+    },
+    {
+        "id": "ee1270b47f435e5c",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a550d2136eb720bb",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Contato Fornecedor",
+        "url": "/fornecedor/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "76610126184ee3fa"
+            ]
+        ]
+    },
+    {
+        "id": "db4653083f2dfbfd",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "76610126184ee3fa",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = \n`START TRANSACTION;\nSELECT s_nome_empresa FROM fornecedor WHERE id_fornecedor = ${msg.req.params.id};\nSELECT s_num_telefone FROM telefone_fornecedor where id_t_fornecedor = ${msg.req.params.id};\nSELECT s_nome_representante from fornecedor WHERE id_fornecedor = ${ msg.req.params.id};\nSELECT s_num_telefone from telefone_representante WHERE id_t_fornecedor = ${msg.req.params.id };\nCOMMIT`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 420,
+        "wires": [
+            [
+                "ef723aa7b359de0f"
+            ]
+        ]
+    },
+    {
+        "id": "ef723aa7b359de0f",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "db4653083f2dfbfd"
+            ]
+        ]
+    },
+    {
+        "id": "39e7348392c2eb6b",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Busca Codigo",
+        "url": "/codigo",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "77776e5acbdd6729"
+            ]
+        ]
+    },
+    {
+        "id": "51cfccacc45e62a7",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "77776e5acbdd6729",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table fornecedor",
+        "func": "msg.topic = `SELECT n_codigo_produto FROM produto WHERE n_codigo_produto = ${msg.payload}`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "43afb6dbcc12e94a"
+            ]
+        ]
+    },
+    {
+        "id": "43afb6dbcc12e94a",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "51cfccacc45e62a7"
+            ]
+        ]
+    },
+    {
+        "id": "83a32dedcea98f09",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Selecionar Produto",
+        "url": "/produtoSelecionado/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "a985799bb38db614"
+            ]
+        ]
+    },
+    {
+        "id": "205a0d9211db5083",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a985799bb38db614",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec produto por id",
+        "func": "msg.topic = `\nSELECT * FROM produto, classe_produto \nWHERE id_t_classe_produto = id_classe \nAND n_codigo_produto = ${msg.req.params.id}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "6149d1c758678c4f"
+            ]
+        ]
+    },
+    {
+        "id": "6149d1c758678c4f",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "205a0d9211db5083"
+            ]
+        ]
+    },
+    {
+        "id": "faf273f6b6e0375c",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Atualiza Produto",
+        "url": "/atualizaProduto",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 600,
+        "wires": [
+            [
+                "d11bd567914b42c9"
+            ]
+        ]
+    },
+    {
+        "id": "d11bd567914b42c9",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Atualiza Produto",
+        "func": "msg.payload = JSON.parse(msg.payload);\nconst n_codigo_produto = msg.payload.n_codigo_produto;\nconst n_codigo_anterior = msg.payload.n_codigo_anterior;\nconst n_qnt_produto = msg.payload.n_qnt_produto;\nconst s_descricao_produto = msg.payload.s_desc_produto;\nconst id_t_classe_produto = msg.payload.id_classe_produto;\nconst c_status_produto = msg.payload.c_status_produto;\nconst id_t_fornecedor = msg.payload.id_t_fornecedor;\nconst s_foto_produto = msg.payload.s_foto_produto;\n\nconst query = \n`UPDATE produto SET \nn_codigo_produto = ${n_codigo_produto},\nid_t_classe_produto = ${id_t_classe_produto},\ns_descricao_produto = '${s_descricao_produto}',\nn_qnt_produto = ${n_qnt_produto},\nid_t_fornecedor = ${id_t_fornecedor},\nc_status_produto = '${c_status_produto}',\ns_foto_produto = '${s_foto_produto}'\nWHERE n_codigo_produto = ${n_codigo_anterior}`;\n\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "ebc1937c65d2e8c1"
+            ]
+        ]
+    },
+    {
+        "id": "ac3e9aabb2993ce6",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ebc1937c65d2e8c1",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "ac3e9aabb2993ce6"
+            ]
+        ]
+    },
+    {
+        "id": "0510375076a4a34d",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Janela Movimentação",
+        "url": "/abrirMovimentacaoProduto/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 740,
+        "wires": [
+            [
+                "029dd861248a1acf"
+            ]
+        ]
+    },
+    {
+        "id": "d37bbe45ad11388c",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "029dd861248a1acf",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec produto por id",
+        "func": "msg.topic = \n`START TRANSACTION;\nSELECT n_codigo_produto, n_qnt_produto, s_descricao_produto FROM produto WHERE n_codigo_produto = ${msg.req.params.id};\nSELECT * FROM natureza_movimentacao;\nCOMMIT;`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 740,
+        "wires": [
+            [
+                "c38d291f79499b55"
+            ]
+        ]
+    },
+    {
+        "id": "c38d291f79499b55",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 740,
+        "wires": [
+            [
+                "d37bbe45ad11388c"
+            ]
+        ]
+    },
+    {
+        "id": "ae6dab90032e175c",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Verifica Status Produto",
+        "url": "/verificaStatusProduto/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 800,
+        "wires": [
+            [
+                "2107e772a4299daa"
+            ]
+        ]
+    },
+    {
+        "id": "f9adcd9a0527bdca",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "2107e772a4299daa",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Selec table produto",
+        "func": "msg.topic = `\nSELECT c_status_produto FROM produto WHERE n_codigo_produto = ${msg.req.params.id} `;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 800,
+        "wires": [
+            [
+                "f6aa1fab0c17aa7e"
+            ]
+        ]
+    },
+    {
+        "id": "f6aa1fab0c17aa7e",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 560,
+        "y": 800,
+        "wires": [
+            [
+                "f9adcd9a0527bdca"
+            ]
+        ]
+    },
+    {
+        "id": "ccf0bef7f7354612",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Movimentação consumada",
+        "url": "/lancaMovimentacao",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 860,
+        "wires": [
+            [
+                "81169deefcc915d9"
+            ]
+        ]
+    },
+    {
+        "id": "2c9cd1ca562ef14a",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 700,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "305f8f956046637f",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 860,
+        "wires": [
+            [
+                "2c9cd1ca562ef14a"
+            ]
+        ]
+    },
+    {
+        "id": "81169deefcc915d9",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "Lançamento",
+        "func": "msg.payload = JSON.parse(msg.payload);\n\nlet query =\n    `START TRANSACTION;\n    UPDATE produto SET n_qnt_produto = ${ msg.payload.n_quantidade_atual } WHERE n_codigo_produto = ${ msg.payload.id_codigo_produto };`;\n\n\n//primeiro processa a entrada\n//caso o array tenha apenas uma posição é porque foi lançado somente entrada de produto\nif (msg.payload.lancamentos.length == 1) {\n    query +=\n    `INSERT INTO movimentacao (id_movimentacao, id_t_usuario, id_t_fornecedor, id_t_natureza_movimentacao, n_qnt_movimentada, dt_data)\n    VALUES(NULL, ${msg.payload.id_usuario}, ${msg.payload.id_t_fornecedor}, ${msg.payload.lancamentos[0][1]}, ${msg.payload.lancamentos[0][0]}, '${msg.payload.d_data}');`;\n}\n\nif (msg.payload.lancamentos.length == 2) {\n    //caso o array tenha duas posições, mas a primeira seja vazio, então será lançado somente a saída de produto\n    if (msg.payload.lancamentos[0] == \"\") \n    {\n        query +=\n        `INSERT INTO movimentacao (id_movimentacao, id_t_usuario, id_t_fornecedor, id_t_natureza_movimentacao, n_qnt_movimentada, dt_data)\n        VALUES(NULL, ${msg.payload.id_usuario}, ${msg.payload.id_t_fornecedor}, ${msg.payload.lancamentos[1][1]}, ${msg.payload.lancamentos[1][0]}, '${msg.payload.d_data}');`;\n    }\n    else \n    {\n        query +=\n        `INSERT INTO movimentacao (id_movimentacao, id_t_usuario, id_t_fornecedor, id_t_natureza_movimentacao, n_qnt_movimentada, dt_data)\n        VALUES(NULL, ${msg.payload.id_usuario}, ${msg.payload.id_t_fornecedor}, ${msg.payload.lancamentos[0][1]}, ${msg.payload.lancamentos[0][0]}, '${msg.payload.d_data}');\n        INSERT INTO movimentacao (id_movimentacao, id_t_usuario, id_t_fornecedor, id_t_natureza_movimentacao, n_qnt_movimentada, dt_data)\n        VALUES(NULL, ${msg.payload.id_usuario}, ${msg.payload.id_t_fornecedor}, ${msg.payload.lancamentos[1][1]}, ${msg.payload.lancamentos[1][0]}, '${msg.payload.d_data}');`;\n    }\n}\nquery += `COMMIT`;\nmsg.topic = query;\nreturn msg;\n\n\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 860,
+        "wires": [
+            [
+                "305f8f956046637f"
+            ]
+        ]
+    },
+    {
+        "id": "bc8f5504827f355a",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Quantidade produto",
+        "url": "/quantidadeProduto/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "f19ec73e813ad7c5"
+            ]
+        ]
+    },
+    {
+        "id": "f19ec73e813ad7c5",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "seleciona a quantidade",
+        "func": "msg.topic = `SELECT n_qnt_produto FROM produto WHERE n_codigo_produto = ${msg.req.params.id}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 920,
+        "wires": [
+            [
+                "416d7a7607bedc78"
+            ]
+        ]
+    },
+    {
+        "id": "c9d810f17b7a1048",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 740,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "416d7a7607bedc78",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 580,
+        "y": 920,
+        "wires": [
+            [
+                "c9d810f17b7a1048"
+            ]
+        ]
+    },
+    {
+        "id": "6c95f291727e5e14",
+        "type": "http in",
+        "z": "25c58c8ddc352842",
+        "name": "Verifica duplicidade",
+        "url": "/verificaExistenciaProduto",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "a1147c5cae2ddcee"
+            ]
+        ]
+    },
+    {
+        "id": "a1147c5cae2ddcee",
+        "type": "function",
+        "z": "25c58c8ddc352842",
+        "name": "seleciona  produto",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.id_classe_prod = msg.payload.id_classe_prod;\nmsg.s_desc_produto = msg.payload.s_desc_produto;\nmsg.topic = \n`SELECT n_codigo_produto FROM produto WHERE s_descricao_produto = '${msg.s_desc_produto}'\nAND id_t_classe_produto = ${msg.id_classe_prod}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "563dbc47c2d67edc"
+            ]
+        ]
+    },
+    {
+        "id": "c2754bd8b4b54853",
+        "type": "switch",
+        "z": "25c58c8ddc352842",
+        "name": "tem ou nao",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 660,
+        "wires": [
+            [
+                "ca39a5ef53321ddd"
+            ],
+            [
+                "17bb7b0ef1cde5dc"
+            ]
+        ]
+    },
+    {
+        "id": "ca39a5ef53321ddd",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 880,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "17bb7b0ef1cde5dc",
+        "type": "http response",
+        "z": "25c58c8ddc352842",
+        "name": "",
+        "statusCode": "209",
+        "headers": {},
+        "x": 880,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "563dbc47c2d67edc",
+        "type": "mysql",
+        "z": "25c58c8ddc352842",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 660,
+        "wires": [
+            [
+                "c2754bd8b4b54853"
+            ]
+        ]
+    },
+    {
+        "id": "f80a6f50c2910666",
+        "type": "mysql",
+        "z": "76f53d9606de16d1",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque 1",
+        "x": 480,
+        "y": 40,
+        "wires": [
+            [
+                "8c227d014e4ad560"
+            ]
+        ]
+    },
+    {
+        "id": "6bb681dcfe4b612b",
+        "type": "link in",
+        "z": "76f53d9606de16d1",
+        "name": "entrada token",
+        "links": [
+            "677c0380fbd542df"
+        ],
+        "x": 155,
+        "y": 40,
+        "wires": [
+            [
+                "7051bca39d97e039"
+            ]
+        ]
+    },
+    {
+        "id": "eb86d0c4e8557293",
+        "type": "http response",
+        "z": "76f53d9606de16d1",
+        "name": "Login Ok",
+        "statusCode": "200",
+        "headers": {},
+        "x": 860,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "23e148b1e89f8a5b",
+        "type": "function",
+        "z": "76f53d9606de16d1",
+        "name": "retorno 200 A",
+        "func": "// msg.senha_informada = null;\nmsg.payload = \n[{id_usuario: msg.id_usuario, s_nome: msg.s_nome, s_desc_usuario: msg.s_desc_usuario,\nretorno: 200, id_token: msg.payload.insertId, time_stamp: msg.time_stamp }];\ndelete(msg.topic); delete(msg.id_usuario); delete(msg.s_nome); delete(msg.s_desc_usuario);\ndelete(msg.token);  delete(msg.retorno); delete(msg.senha_informada); delete(msg.time_stamp);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 100,
+        "wires": [
+            [
+                "eb86d0c4e8557293"
+            ]
+        ]
+    },
+    {
+        "id": "3d8578d4e0f09675",
+        "type": "http in",
+        "z": "76f53d9606de16d1",
+        "name": "Verifica token",
+        "url": "/token/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "4e8498fc5eccc58f"
+            ]
+        ]
+    },
+    {
+        "id": "a1d39ad2c54ec7e4",
+        "type": "mysql",
+        "z": "76f53d9606de16d1",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque 2",
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "0513e03b1a87e66d"
+            ]
+        ]
+    },
+    {
+        "id": "4e8498fc5eccc58f",
+        "type": "function",
+        "z": "76f53d9606de16d1",
+        "name": "Select validade token",
+        "func": "msg.id_token = parseInt(msg.req.params.id);\nmsg.topic = \n`SELECT s_token FROM token \nWHERE \nid_token = ${msg.id_token};`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "a1d39ad2c54ec7e4"
+            ]
+        ]
+    },
+    {
+        "id": "44386bf6e3cdde4b",
+        "type": "http response",
+        "z": "76f53d9606de16d1",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 900,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7051bca39d97e039",
+        "type": "function",
+        "z": "76f53d9606de16d1",
+        "name": "Recebe info token",
+        "func": "msg.id_usuario = msg.payload[0].id_usuario;\nmsg.s_nome = msg.payload[0].s_nome;\nmsg.s_desc_usuario = msg.payload[0].s_desc_usuario;\n\nconst token1 = Math.random().toString(16).substring(2);\nconst token2 = Math.random().toString(16).substring(2);\nconst token3 = Math.random().toString(16).substring(2);\nmsg.token = token1 + token2 + token3;\nconst timeS = new Date().getTime() + 10000;\nmsg.time_stamp = timeS; \nmsg.topic = `INSERT INTO token (id_t_usuario, s_token, s_validade) VALUES (${msg.id_usuario}, '${msg.token}', '${msg.time_stamp}')`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 40,
+        "wires": [
+            [
+                "f80a6f50c2910666"
+            ]
+        ]
+    },
+    {
+        "id": "8c227d014e4ad560",
+        "type": "function",
+        "z": "76f53d9606de16d1",
+        "name": "token Ok ou Nao",
+        "func": "const time_now = new Date().getTime();\nif(time_now < msg.time_stamp)\n{\n    msg.retorno = 200;\n}\nelse\n{\n    msg.retorno = 401;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 40,
+        "wires": [
+            [
+                "dffb45ef78240ffc"
+            ]
+        ]
+    },
+    {
+        "id": "dffb45ef78240ffc",
+        "type": "switch",
+        "z": "76f53d9606de16d1",
+        "name": "",
+        "property": "retorno",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "401",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 100,
+        "wires": [
+            [
+                "23e148b1e89f8a5b"
+            ],
+            [
+                "bfe4c75fd3daebd2"
+            ]
+        ]
+    },
+    {
+        "id": "600415ce520d75cb",
+        "type": "http response",
+        "z": "76f53d9606de16d1",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 660,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bfe4c75fd3daebd2",
+        "type": "function",
+        "z": "76f53d9606de16d1",
+        "name": "retorno 401 A",
+        "func": "msg.payload = \n[{id_usuario: msg.id_usuario, s_nome: msg.s_nome, s_desc_usuario: msg.s_desc_usuario,\ntoken: msg.token, retorno: msg.retorno, id_token: msg.payload.insertId}];\ndelete(msg.topic); delete(msg.id_usuario); delete(msg.s_nome); delete(msg.s_desc_usuario);\ndelete(msg.token); delete(msg.validade_token); delete(msg.retorno); delete(msg.senha_informada)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "600415ce520d75cb"
+            ]
+        ]
+    },
+    {
+        "id": "0175e00b269c0be0",
+        "type": "http response",
+        "z": "76f53d9606de16d1",
+        "name": "",
+        "statusCode": "204",
+        "headers": {},
+        "x": 900,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0513e03b1a87e66d",
+        "type": "switch",
+        "z": "76f53d9606de16d1",
+        "name": "",
+        "property": "payload[0].s_token",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 280,
+        "wires": [
+            [
+                "0175e00b269c0be0"
+            ],
+            [
+                "44386bf6e3cdde4b"
+            ]
+        ]
+    },
+    {
+        "id": "8e90929a38dbcb14",
+        "type": "http in",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica login",
+        "url": "/verificaUserName",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "f20df482bf3f7b57"
+            ]
+        ]
+    },
+    {
+        "id": "efd120cd05bb920f",
+        "type": "mysql",
+        "z": "d9609e713e0fd72c",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "79742edd89fdd8ba"
+            ]
+        ]
+    },
+    {
+        "id": "f20df482bf3f7b57",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "Captura dados do usuario",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.senha_informada = msg.payload.pass_user;\nmsg.topic = \n`SELECT usuario.s_user_name, usuario.s_pass_user, usuario.s_nome, usuario.id_usuario, usuario.c_status_usuario, nivel_usuario.s_desc_usuario\nFROM\n   usuario\nINNER JOIN\n   nivel_usuario ON usuario.id_t_nivelUsuario = nivel_usuario.id_nivel_usuario\nWHERE\n   s_user_name = '${msg.payload.user_name}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 60,
+        "wires": [
+            [
+                "efd120cd05bb920f"
+            ]
+        ]
+    },
+    {
+        "id": "79742edd89fdd8ba",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica se existe user",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 740,
+        "y": 60,
+        "wires": [
+            [
+                "1fc03c69e58b5b2e"
+            ],
+            [
+                "af4d5e4340aa14d2"
+            ]
+        ]
+    },
+    {
+        "id": "ef89eadf3b5df938",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "Usuario inexistente",
+        "statusCode": "209",
+        "headers": {},
+        "x": 1190,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "54997ace783c4510",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "Primeiro Acesso",
+        "statusCode": "210",
+        "headers": {},
+        "x": 860,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f50f9717c4ca229b",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "Senha incorreta",
+        "statusCode": "211",
+        "headers": {},
+        "x": 820,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f5e13548551f172d",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "property": "payload[0].s_pass_user",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "neq",
+                "v": "senha_informada",
+                "vt": "msg"
+            },
+            {
+                "t": "eq",
+                "v": "senha_informada",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "11873016e28cf74a"
+            ],
+            [
+                "cdca95ad700d332c"
+            ],
+            [
+                "677c0380fbd542df"
+            ]
+        ]
+    },
+    {
+        "id": "06a542c502728612",
+        "type": "http in",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica existência user",
+        "url": "/verificacaoUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "c98fdf66a6fa7367"
+            ]
+        ]
+    },
+    {
+        "id": "aee784d9fbb46071",
+        "type": "mysql",
+        "z": "d9609e713e0fd72c",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 600,
+        "y": 340,
+        "wires": [
+            [
+                "c3e3e957b84183f0"
+            ]
+        ]
+    },
+    {
+        "id": "c98fdf66a6fa7367",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "query verifica usuaraio",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.topic = `SELECT s_user_name, c_status_usuario FROM usuario WHERE s_user_name = '${msg.payload.user_name}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "aee784d9fbb46071"
+            ]
+        ]
+    },
+    {
+        "id": "6f02113386649f06",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1240,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c3e3e957b84183f0",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica se existe user",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 800,
+        "y": 340,
+        "wires": [
+            [
+                "edd12e7b8e634069"
+            ],
+            [
+                "6215584ce78ce5c7"
+            ]
+        ]
+    },
+    {
+        "id": "6215584ce78ce5c7",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "209",
+        "headers": {},
+        "x": 1000,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a3e034e0e6eafd4c",
+        "type": "http in",
+        "z": "d9609e713e0fd72c",
+        "name": "Primeira senha",
+        "url": "/primeiraSenha",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "416379faaf9d5310"
+            ]
+        ]
+    },
+    {
+        "id": "11ba68f6e0756f6a",
+        "type": "mysql",
+        "z": "d9609e713e0fd72c",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "03b8125548564b76"
+            ]
+        ]
+    },
+    {
+        "id": "416379faaf9d5310",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "resgistra senha",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.topic = `UPDATE usuario SET s_pass_user='${msg.payload.pass_user}' WHERE s_user_name = '${msg.payload.user_name}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "11ba68f6e0756f6a"
+            ]
+        ]
+    },
+    {
+        "id": "a22eae22821aaf12",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a9ecfe74dbebf9ca",
+        "type": "http in",
+        "z": "d9609e713e0fd72c",
+        "name": "Redefinição senha",
+        "url": "/redefinirSenha",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "9e553135089d3d20"
+            ]
+        ]
+    },
+    {
+        "id": "a3f7b4f90b089a86",
+        "type": "mysql",
+        "z": "d9609e713e0fd72c",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "997447ec93f28db6"
+            ]
+        ]
+    },
+    {
+        "id": "9e553135089d3d20",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "query pega user e pass",
+        "func": "msg.payload = JSON.parse(msg.payload);\nmsg.senha_atual_informada = msg.payload.current_pass;\nmsg.usuario = msg.payload.user_name;\nmsg.senha_atualizada = msg.payload.pass_user;\n\nmsg.topic = `SELECT s_pass_user FROM usuario WHERE s_user_name = '${msg.usuario}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 420,
+        "wires": [
+            [
+                "a3f7b4f90b089a86"
+            ]
+        ]
+    },
+    {
+        "id": "a715152c5e5e31f2",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "997447ec93f28db6",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Confere senhas",
+        "property": "payload[0].s_pass_user",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "senha_atual_informada",
+                "vt": "msg"
+            },
+            {
+                "t": "neq",
+                "v": "senha_atual_informada",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "06f590ec236d246c"
+            ],
+            [
+                "a367b1ab615c038f"
+            ]
+        ]
+    },
+    {
+        "id": "f037823707a2724b",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "registra alteração senha",
+        "func": "msg.topic = `UPDATE usuario SET s_pass_user = '${msg.senha_atualizada}' WHERE s_user_name = '${msg.usuario}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "e6493d68de97aa18"
+            ]
+        ]
+    },
+    {
+        "id": "6dca84d5ef37e04c",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "211",
+        "headers": {},
+        "x": 540,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e6493d68de97aa18",
+        "type": "mysql",
+        "z": "d9609e713e0fd72c",
+        "mydb": "05bd3651b00a2450",
+        "name": "Estoque",
+        "x": 820,
+        "y": 480,
+        "wires": [
+            [
+                "a954bfeb348013c3"
+            ]
+        ]
+    },
+    {
+        "id": "4b09c2c648632257",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa valor senha 1",
+        "func": "msg.payload[0].retorno = 210;\nmsg.topic = null;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "54997ace783c4510"
+            ]
+        ]
+    },
+    {
+        "id": "cdca95ad700d332c",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa valor senha 2",
+        "func": "delete (msg.senha_informada);\ndelete(msg.topic);\nmsg.payload = [{retorno: 211}];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 220,
+        "wires": [
+            [
+                "f50f9717c4ca229b"
+            ]
+        ]
+    },
+    {
+        "id": "03b8125548564b76",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa valor senha 3",
+        "func": "delete(msg.topic);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 280,
+        "wires": [
+            [
+                "a22eae22821aaf12"
+            ]
+        ]
+    },
+    {
+        "id": "a367b1ab615c038f",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa valor senha 4",
+        "func": "delete(msg.topic);\ndelete(msg.senha_atualizada);\ndelete (msg.senha_atual_informada);\ndelete(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 560,
+        "wires": [
+            [
+                "6dca84d5ef37e04c"
+            ]
+        ]
+    },
+    {
+        "id": "a954bfeb348013c3",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa valor senha 5",
+        "func": "delete(msg.topic)\ndelete(msg.senha_atual_informada);\ndelete(msg.senha_atualizada);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 480,
+        "wires": [
+            [
+                "a715152c5e5e31f2"
+            ]
+        ]
+    },
+    {
+        "id": "11873016e28cf74a",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "property": "senha_informada",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "123",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "123",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "4b09c2c648632257"
+            ],
+            [
+                "cdca95ad700d332c"
+            ]
+        ]
+    },
+    {
+        "id": "1fc03c69e58b5b2e",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "Gera retorno 209",
+        "func": "msg.payload = [{retorno: 209}];\ndelete(msg.topic);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 40,
+        "wires": [
+            [
+                "ef89eadf3b5df938"
+            ]
+        ]
+    },
+    {
+        "id": "06f590ec236d246c",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica senha atual",
+        "property": "payload[0].s_pass_user",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "senha_atualizada",
+                "vt": "msg"
+            },
+            {
+                "t": "eq",
+                "v": "senha_atualizada",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "f037823707a2724b"
+            ],
+            [
+                "daf5b3c38c6416cc"
+            ]
+        ]
+    },
+    {
+        "id": "6edaaf891f6523a5",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "",
+        "statusCode": "212",
+        "headers": {},
+        "x": 740,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "677c0380fbd542df",
+        "type": "link out",
+        "z": "d9609e713e0fd72c",
+        "name": "saida token",
+        "mode": "link",
+        "links": [
+            "6bb681dcfe4b612b"
+        ],
+        "x": 315,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "daf5b3c38c6416cc",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "limpa dados",
+        "func": "delete(msg.topic);\ndelete(msg.senha_atualizada);\ndelete (msg.senha_atual_informada);\ndelete(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 520,
+        "wires": [
+            [
+                "6edaaf891f6523a5"
+            ]
+        ]
+    },
+    {
+        "id": "af4d5e4340aa14d2",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica se existe user",
+        "property": "payload[0].c_status_usuario",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "I",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "A",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 960,
+        "y": 80,
+        "wires": [
+            [
+                "9a93ebc8ff8bba02"
+            ],
+            [
+                "f5e13548551f172d"
+            ]
+        ]
+    },
+    {
+        "id": "0337be56febd44dc",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "Usuario inativo",
+        "statusCode": "213",
+        "headers": {},
+        "x": 1400,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9a93ebc8ff8bba02",
+        "type": "function",
+        "z": "d9609e713e0fd72c",
+        "name": "Gera retorno 209",
+        "func": "msg.payload = [{retorno: 213}];\ndelete(msg.topic);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 80,
+        "wires": [
+            [
+                "0337be56febd44dc"
+            ]
+        ]
+    },
+    {
+        "id": "edd12e7b8e634069",
+        "type": "switch",
+        "z": "d9609e713e0fd72c",
+        "name": "Verifica se existe user",
+        "property": "payload[0].c_status_usuario",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "I",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "A",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1040,
+        "y": 340,
+        "wires": [
+            [
+                "1742b554381280d5"
+            ],
+            [
+                "6f02113386649f06"
+            ]
+        ]
+    },
+    {
+        "id": "1742b554381280d5",
+        "type": "http response",
+        "z": "d9609e713e0fd72c",
+        "name": "Usuario inativo",
+        "statusCode": "213",
+        "headers": {},
+        "x": 1260,
+        "y": 320,
+        "wires": []
+    }
+]

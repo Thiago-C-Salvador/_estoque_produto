@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colaborador - BackOffice</title>
+    <link rel="stylesheet" type="text/css" href="../../src/style/geral.css">
+    <link rel="stylesheet" type="text/css" href="colaboradores.css">
+    <script src="colaboradores.js" type="module" defer></script>
+</head>
+<body>
+    <!--as tags de ancora "a" é importante para o funcionamento da contagem do tempo de ociosidade, que é executado através do método "sessao_usuario", desenvolvido dentro do arquivo partinenste.js-->
+    <a></a>
+    
+    <!--Título da janela dentro do body-->
+    <div id="id_cabecalho-janela" class="cabecalho-janela">
+        <div>Colaboradores</div>
+    </div>
+        
+        <div id="id_div-area-busca" class="funcoes-e-busca">
+            <!--bloco com os campos e botões para realizar buscas-->
+            <div id="id_div-busca" class="area-de-busca">
+                <div id="id_div-busca-nome" class="busca-nome">
+                    <label class="texto-pesquisa">Buscar pelo nome</label>
+                    <input type="text" id="id_input-pesquisa" class="input-pesquisa-dataGrid">
+                </div>
+                <div id="id_div-busca-radios" class="busca-por-id">
+                    <div id="id_div-ultimoID" class="ultimoID">
+                        <label for="id_radios-ultimoId" class="texto-pesquisa">Último ID</label>
+                        <input type="checkbox" id="id_radios-ultimoId" name="chekbox-id">
+                    </div>
+
+                    <div id="id_div-entre-ids" class="entre-ids">
+                        <span class="texto-pesquisa">ID</span>
+                        <input type="text" id="id_input-entre-ids-1" class="input-entre-ids">
+                        <span class="texto-pesquisa">até</span>
+                        <input type="text" id="id_input-entre-ids-2" class="input-entre-ids">
+                    </div>
+
+                    <div id="id_div-btn-buscar" class="btn-pesquisar-dataGrid">
+                        <button  id="id_btn-buscaId" class="btn-geral pesquisa-dataGrid">Buscar</button>
+                    </div>
+                    
+                </div> 
+            </div>
+            <!--fim do bloco de buscas-->
+
+            <!--elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
+            <div class= "btns-principais"> 
+                <div class="divisao-btns-principais">
+                    <img src="../../imgs/add.svg" class="btn-principais-operacoes" title="Adicionar colaborador" id="id_add-novo"/>
+                    <img src="../../imgs/todos.svg" class="btn-principais-operacoes" title="Listar todos (ativos e inativos)" id="id_listar-ColabCadastrados"/>
+                </div>
+                <div class="divisao-btns-principais">
+                    <img src="../../imgs/list_all.svg" class="btn-principais-operacoes" title="Listar todos" id="id_listar-todos"/>
+                    <img src="../../imgs/refresh.svg" class="btn-principais-operacoes" title="Atualizar lista" id="id_atualizar-lista"/>
+                </div>
+            </div>
+            <!--fim elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
+        </div>
+
+    <!-- bloco Data Grid View-->
+    <div id="id_grid" class="grid">
+        <!--Titulo das colunas da grid-->
+        <div id="id_titulos-coluna-grid" class="titulos-coluna-grid">
+            <div class="c1">Id</div>
+            <div class="c2">Nome</div>
+            <div class="c3">Nível</div>
+            <div class="c4">Status</div>
+            <div class="c5">Operações</div>
+        </div>
+        <!--fim titulo conluas grid-->
+        <div id="id_div-pai-dados-grid" class="div-pai-dados-grid">
+            <!--elemento DOM que será carregado os dados de cada linah da grid-->
+            <div id="id_dados-grid" class="dados-grid">
+            <!--fim carregamento dados grid-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

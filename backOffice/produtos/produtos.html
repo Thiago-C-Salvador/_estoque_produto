@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - BackOffice</title>
+    <link rel="stylesheet" type="text/css" href="../../src/style/geral.css">
+    <link rel="stylesheet" type="text/css" href="produtos.css">
+    <script src="produtos.js" type="module" defer></script>
+</head>
+<body>
+    <!--as tags de ancora "a" é importante para o funcionamento da contagem do tempo de ociosidade, que é executado através do método "sessao_usuario", desenvolvido dentro do arquivo partinenste.js-->
+    <a></a>
+
+    <!--Título da janela dentro do body-->
+    <div id="id_cabecalho-janela" class="cabecalho-janela">
+        <div>Produtos</div>
+    </div>
+
+        <!--bloco com os campos e botões para realizar buscas-->
+        <div id="id_div-area-busca" class="funcoes-e-busca">
+            <div id="id_div-busca" class="area-de-busca">
+
+                <div id="id_div-busca-radios" class="busca-id">
+
+                    <div id="id_div-filtro-e-busca" class="filtro">
+                        <label class="texto-pesquisa">Filtrar:</label>
+                        <select id="id_select-classe" class="select-classe"></select>
+                    </div>
+                    <div id="id_div-busca-id" class="buscar-por-id">
+                        <label class="texto-pesquisa">Buscar ID</label>
+                        <input type="text" id="id_input-id" class="input-id">
+                    </div>
+
+                </div> 
+
+                <div id="id_div-busca-nome" class="busca-nome-produto">
+                    <label class="texto-pesquisa">Buscar pelo nome</label>
+                    <input type="text" id="id_input-pesquisa" class="input-pesquisa-dataGrid">
+                </div>
+            </div>
+            <!--fim do bloco de buscas-->
+
+            <!--elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
+            <div class= "btns-principais"> 
+                <div class="divisao-btns-principais">
+                    <img src="../../imgs/add.svg" class="btn-principais-operacoes" title="Adicionar produto" id="id_add-novo"/>
+                    <img src="../../imgs/todos.svg" class="btn-principais-operacoes" title="Listar todos (ativos e inativos)" id="id_listar-ProdutosCadastrados"/>
+                </div>
+                <div class="divisao-btns-principais">
+                    <img src="../../imgs/list_all.svg" class="btn-principais-operacoes" title="Listar todos" id="id_listar-todos"/>
+                    <img src="../../imgs/refresh.svg" class="btn-principais-operacoes" title="Atualizar lista" id="id_atualizar-lista"/>
+                </div>
+            </div>
+            <!--fim elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
+        </div>
+
+    <!-- bloco Data Grid View-->
+    <div id="id_grid" class="grid">
+        <!--Titulo das colunas da grid-->
+        <div id="id_titulos-coluna-grid" class="titulos-coluna-grid">
+            <div class="cp1">Cod</div>
+            <div class="ctp2">Descrição</div>
+            <div class="cp3">Quantidade</div>
+            <div class="cp4">Classe</div>
+            <div class="cp5">Operações</div>
+        </div>
+        <!--fim titulo conluas grid-->
+        <div id="id_div-pai-dados-grid" class="div-pai-dados-grid">
+            <!--elemento DOM que será carregado os dados de cada linah da grid-->
+            <div id="id_dados-grid" class="dados-grid">
+            <!--fim carregamento dados grid-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

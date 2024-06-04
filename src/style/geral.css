@@ -1,0 +1,356 @@
+@import url(data_grid_view.css);
+*
+{
+    margin: 0px;
+    padding: 0px;
+    /* box-sizing: border-box; */
+}
+
+:root
+{
+    --azul-mais-usado: #248;
+    --corpo-formulario: #888;
+    --azul-botoes-form:  #005699;
+    --contorno-laranja: #f90;
+    --input_readOnly: #fdd;
+    --menssagem_atencao: #DA0;
+    --menssagem_ok: #248;
+    --menssagem_erro_severo: #f22;
+    --input_readOnly: #fdd;
+}
+
+body
+{
+    overflow: hidden !important;
+}
+
+.menuPrincipal
+{  
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 225px;
+    height: 100vh;
+    transition: all .5s !important;
+    cursor: pointer;
+}
+
+.menuItens
+{  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; 
+    background-color: #ccc;
+    height: 100vh;
+}
+
+.ocultar-menu
+{
+    left: -200px !important;
+    transition: all .4s;
+}
+
+.btn-menuItens
+{
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 15px;
+    width:160px;
+    border: none;
+    border-radius: 4px;
+    background-color: #999;
+    color: #fff;
+    font-family: cursive;
+    font-size:15px;
+}
+
+.btn-menuItens:hover
+{
+    color: #000;
+    background-color: #fff;
+}
+
+.f_principal
+{
+    border: none;
+    width: 100%;
+    height: 100vh;
+}
+
+.imagens
+{
+    width: 20px;
+    height: 20px;
+    margin-left: 7px;
+}
+
+.btn-geral
+{
+    padding: 4px;
+    font-size: 12px;
+    background-color: var(--azul-botoes-form);
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 20px 0px 20px;
+}
+
+.btn-geral:focus
+{
+    border-bottom: 2px solid var(--contorno-laranja);
+    border-left: 2px solid var(--contorno-laranja);
+}
+
+.btn-geral:hover
+{
+    border-bottom: 2px solid var(--contorno-laranja);
+    border-left: 2px solid var(--contorno-laranja);
+}
+
+.btn-geral:active
+{
+    border: none;
+    border-top: 2px solid var(--contorno-laranja);
+    border-right: 2px solid var(--contorno-laranja);
+}
+
+.btns-principais
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 10%;
+}
+
+.btn-principais-operacoes
+{
+    background-color: var(--azul-mais-usado);
+    border-radius: 100%;
+    cursor: pointer;
+    width: 40%;
+}
+
+.btn-principais-operacoes:hover
+{
+
+    border-top: 2px solid orange;
+    border-right: 2px solid orange;
+}
+
+.btn-principais-operacoes:active
+{
+    border: none;
+    border-left: 2px solid orange;
+    border-bottom: 2px solid orange;
+}
+
+.divisao-btns-principais
+{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+/** TOPO DA JANELA **/
+
+.cabecalho-janela
+{
+    text-align: center;
+    font-size: 28px;
+    text-decoration-line: underline;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 7px 0px;
+    color: #00F;
+}
+
+/** JANELAS POPUP **/
+.botaoClose_barraTitulo
+{
+    background-color: #f00;
+    width: 5%;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.botaoClose_barraTitulo:active
+{
+    border-top: 1px solid var(--contorno-laranja);
+    border-right: 1px solid var(--contorno-laranja);
+}
+
+.remover-foto
+{
+    color: #fff; 
+    margin:auto;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.remover-foto:hover
+{
+    text-decoration: underline;
+}
+
+.remover-foto:active
+{
+    font-weight: 600;
+}
+
+/** Area de pesquisa data grid view**/
+.funcoes-e-busca
+{
+    padding: 0px 4px 0px 4px;
+    width: 40%; 
+    display: flex; 
+    margin: auto;
+}
+
+.area-de-busca
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.busca-nome
+{
+    padding: 0px 0px 0px 4px;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.input-pesquisa-dataGrid
+{
+    width: 70.5%;
+    outline:none; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    padding-left: 3px;
+}
+
+.texto-pesquisa
+{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.busca-por-id
+{   
+    display: flex;
+    justify-content: flex-end;
+    margin: 6px 0px 6px 0px;
+    width: 100%;
+}
+
+.ultimoID
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 16%;
+}
+
+input[type=checkbox]
+{
+    cursor: pointer;
+    accent-color: blue;
+}
+
+.entre-ids
+{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    width: 29%;
+    margin: 0px 10px 0px 7px;
+}
+
+.input-entre-ids
+{
+    width: 28%;
+    padding: 2px;
+    font-size: 16px; 
+    text-align: center;
+    outline: none; 
+    border-radius: 4px;
+}
+
+.btn-pesquisar-dataGrid
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 66px;
+}
+
+.pesquisa-dataGrid
+{
+    margin: 0px !important;
+    background-color: var(--azul-mais-usado) !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* link de redefinição de senha */
+.redefinir-senha:hover
+{
+    font-weight: 600;
+}
+/*fim link redefinição de senha*/
+
+/* padronizaçãoestilização de textos */
+p
+{
+    margin: 2px 0px 2px 0px;
+}
+
+details
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+details summary
+{
+    list-style: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+details summary::after
+{
+    background: black; 
+    content: "+"; 
+    color: #fff; 
+    float: left;  
+    text-align: center; 
+    width: 20px;
+    border-radius: 100%;
+    margin-right: 5px;
+}
+
+details[open] summary::after
+{
+    content: "-"; 
+}
+
+ul
+{
+    margin-left: 30px;
+}
+
+li
+{
+    margin: 1px 0px 1px 0px;
+}
+
+.sublista
+{
+    margin-left: 15px; 
+}

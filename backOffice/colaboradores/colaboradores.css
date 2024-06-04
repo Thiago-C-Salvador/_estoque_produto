@@ -1,0 +1,59 @@
+body
+{
+    overflow: auto !important;
+}
+
+.img-foto
+{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 5px;
+    height: 150px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 10px;
+}
+
+/*estilização de elementos Telefone */
+.telefones
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    width: 98%;
+    background-color: #fff;
+    padding: 4px 4px;
+    border-radius: 4px;;
+}
+
+.ocultaDivTels
+{
+    display: none;
+}
+
+/*fim estilização telefone */
+
+/* campos de email */
+.email-invalido
+{
+    color:red;
+}
+.email-valido
+{
+    color: blue;
+}
+
+.caixa-message
+{
+    width:100%; 
+    padding: 2px 0px 2px 0px;
+    margin-top: -3px;
+    margin-bottom: 3px; 
+    color: #eee;
+    border: 1px solid red;
+    border-radius: 4px; 
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Fim campos de emial */

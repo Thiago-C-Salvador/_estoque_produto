@@ -1,0 +1,100 @@
+.cabecalho_topo
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--azul-mais-usado);
+    border-radius: 2px;
+    color: #fff;
+    min-height: 25px;
+}
+
+.logo
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* area engrenagem e informações do usuário */
+.config-users
+{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin-right: 5px;
+    padding: 1.5px 0px 1px 0px;
+}
+
+.info-usuario
+{
+    display: flex;
+    margin-right: 10px;
+}
+
+.btns-cabecalho
+{
+    display: flex;;
+    cursor:pointer;
+    width: 25px;
+}
+
+#id_btn-engrenagem
+{
+    position: relative;
+}
+
+/* fim area engrenagem e informações do usuário */
+
+.bloco-info-engrenagem
+{
+    min-width: 9%;
+    min-height: 8%;
+    background-color: #fff;
+    border: none; 
+    border-radius: 0px 0px 0px 8px;
+    transition: all .5s !important;
+    margin-right: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* data menu engrenagem */
+.data-hora-engranagem
+{
+    text-align: center; 
+    margin-top: 5px;
+    color: #cbb;
+    font-size: 12px;
+    text-decoration: underline;
+}
+/* fim data menu engrenagem */
+
+/* opções menu engrenagem */
+.p-logOf, .p-dados-usuario
+{
+    text-align: center;
+    cursor:pointer;
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.p-logOf:hover, .p-dados-usuario:hover
+{
+    text-decoration: underline;
+}
+
+/* fim opções menu engrenagem */
+
+.div-apresentacao
+{
+    width: 50%; 
+    background-color: #ccc;
+    color: #000;
+    margin: auto;
+    padding: 6px;
+    margin-top: 30px;
+    border-style: double;
+    border-radius: 6px;
+}

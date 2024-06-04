@@ -1,0 +1,197 @@
+.grid
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulos-coluna-grid
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--azul-mais-usado);
+    color: #fff;
+    width: 52%;
+}
+
+.div-pai-dados-grid
+{
+    display: flex;
+    margin-left: 1%;
+    width: 52.98%;
+}
+
+.div-pai-dados-grid-curinga
+{
+    display: flex;
+    width: 52%;
+}
+
+.dados-grid
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+
+.linhas-grid
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.linhas-grid:nth-child(odd)
+{
+    background-color: #8884;
+}
+
+.linhas-grid:nth-child(even)
+{
+    background-color: #8889;
+}
+
+.linhas-grid:hover
+{
+    background-color: pink;
+}
+
+/*Colunas grid colaboradores */
+.c1
+{
+    width: 10%;
+    text-align: center;
+}
+
+.c2
+{
+    width: 54%;
+    text-align: center;
+}
+
+.c3, .c4
+{
+    width: 12.5%;
+    text-align: center;
+}
+
+.c5
+{
+    width: 13%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+/*Fim colunas grid produto*/
+
+/*Colunas grid fornecedores */
+
+.cf1
+{
+    width: 7%;
+    text-align: center;
+}
+
+.cf2
+{
+    width: 40%;
+    text-align: center;
+    
+}
+
+.cf3
+{
+    width: 33%;
+    text-align: center;
+}
+
+.cf4
+{
+    width: 7%;
+    text-align: center;
+}
+
+.cf5
+{
+    width: 13%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+/*Fim colunas grid fornecedor*/
+
+/*Colunas grid produto*/
+.cp1
+{
+    width: 8%;
+    text-align: center;
+}
+
+.ctp2
+{
+    width: 54%;
+    text-align: center;
+}
+
+.cp2
+{
+    width: 54%;
+    text-align: center;
+}
+
+.descricaoProduto
+{
+    margin: auto;
+    width: fit-content;
+}
+.descricaoProduto:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cp3, .cp4
+{
+    width: 12.5%;
+    text-align: center;
+}
+
+.cp5
+{
+    width: 15%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+/*Fim colunas grid produtor*/
+
+
+/* .nomes-grid
+{
+    text-align: start !important;
+} */
+
+.imagens
+{
+    width: 22px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.ocultaLinhas
+{
+    display: none;
+}
