@@ -14,4 +14,7 @@ Por fim, instale um "editor de código de desenvolvimento. Um dos mais recomenda
 
 Pronto!
 
-Aaah, mas claro que não é um sistema pronto, é um sitema em que eu fiz uso do conhecimento adquirido e de muita busca po conhecimento e exemplos durante o desenvovimento desse projeto, que se for olhar pelo ponto de vista de um sitema completa: ainda etá longe, mas a ideia aqui não é postar um sistema completa, mas sim poder compartilhar conhecimentos e mostar minha forma de trabalhar e minha lógica de raciocínio. Contudo, pretendo sim ir dar continuidade ao desenvolvimento desse sistema com novas funções, telas etc; porém, não sei se continuarei em JS puro ou se passerei tudo para Type e daí partir para a cuntinuidade. Talvez, até mesmo passando o bakcend para PHP8.
+Aaah, mas claro que não é um sistema pronto, é um sitema em que eu fiz uso do conhecimento adquirido, e de muita busca por conhecimento e exemplos durante o desenvovimento desse projeto, que se for olhar pelo ponto de vista de um sitema completo: ainda etá longe, mas a ideia aqui não é postar um sistema completo, mas sim, poder compartilhar conhecimentos e mostar minha forma de trabalhar, minha lógica de raciocínio e poder ter noção de como fui evoluindo a cada linha de código, pois não mudei quase nada a cada evolução do código, já que é de extrama importãncia ter ideia de como evoluímos com o trabalho, com a busca, com os erros de dias após dias. Todavia, pretendo dar continuidade ao desenvolvimento desse sistema com novas funções, telas etc; porém, não sei se continuarei em JS puro ou se passerei tudo para Type e daí partir para a cuntinuidade. Talvez, até mesmo passando o bakcend para PHP8.
+
+Grato pela sua atenção e leitura do arquivo.
+Obrigado!
