@@ -1,4 +1,4 @@
-import { bloco_informacoes_usuario } from "../src/views/blocoEngrenagem.js";
+import { box_usuario } from "../src/modules/menuEngrenagem.js";
 import { verifica_token } from "../src/function/pertinentes.js";
 
 //se o login ocorrer com sucesso é gerado a ssesionStorage "teste logado" com seu par "ok", assim libera a navegação dentro da aplicação
@@ -67,7 +67,7 @@ if(sessionStorage.getItem("teste logado") == "ok")
             if(localStorage.getItem("bloco info aberta") == "fechada")
             {
                 //arquivo que cria o menu suspenso
-                bloco_informacoes_usuario();
+                box_usuario();
                 localStorage.setItem("bloco info aberta", "aberta");
             }
         });
@@ -82,7 +82,7 @@ if(sessionStorage.getItem("teste logado") == "ok")
             }
             else if(localStorage.getItem("bloco info aberta", "fechada"))
             {
-                bloco_informacoes_usuario();
+                box_usuario_usuario();
                 localStorage.setItem("bloco info aberta", "aberta");
             }
         });

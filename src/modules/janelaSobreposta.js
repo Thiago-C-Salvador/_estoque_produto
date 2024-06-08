@@ -1,9 +1,9 @@
 import { regraNome, format_maliavel_num_contato, carregamento_foto, select_obrigatorio } from "../function/apoio.js";
 import { inputNumerosLetras, lengthMaxInput, regra_input_somente_digitos, campoEmail } from "../function/apoio.js";
-import { dataGridView_colaborador, dataGridView_fornecedor, dataGridView_produtos } from "../modules/dataGridView.js";
+import { dataGridView_colaborador, dataGridView_fornecedor, dataGridView_produtos } from "./dataGridView.js";
 import { validacaoNumeroTelefone, verificaDuplicidadeTelefone } from "../function/pertinentes.js";
 import { regrasCamposProduto, regrasCamposColaborador, regrasCamposFornecedor, verificaCadastroProduto } from "../function/pertinentes.js";
-import Cxmsg from "../modules/caixaMenssagem.js";
+import Cxmsg from "./caixaMenssagem.js";
 
 const servidor = sessionStorage.getItem("servidor_nodeRead");
 const endpoint_todosColaboradores = `${servidor}/todosUsuariosAtivos`;
@@ -91,7 +91,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
     const botaoClose = document.createElement("img")
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -255,7 +255,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
     divCampos.appendChild(input_foto);
 
     const img_foto = document.createElement("img");
-    img_foto.setAttribute("src", "../../imgs/3x4_vazio/placeholder-3x4.jpg");
+    img_foto.setAttribute("src", "../../../imgs/3x4_vazio/placeholder-3x4.jpg");
     img_foto.setAttribute("title","Foto colaborador");
     img_foto.setAttribute("id","id_campo-foto-operador");
     img_foto.setAttribute("class","img-foto");
@@ -270,7 +270,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
     {  
         if( !img_foto.src.includes("imgs/3x4_vazio/placeholder-3x4.jpg") )
         {
-            img_foto.src = "../../imgs/3x4_vazio/placeholder-3x4.jpg";
+            img_foto.src = "../../../imgs/3x4_vazio/placeholder-3x4.jpg";
             input_foto.value = "";
         }
     })
@@ -414,7 +414,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
 
                                 if( img_foto.src.slice(img_foto.src.length-1, img_foto.src.length)=="#")
                                 {
-                                    img_foto.src = "../../imgs/3x4_vazio/placeholder-3x4.jpg";
+                                    img_foto.src = "../../../imgs/3x4_vazio/placeholder-3x4.jpg";
                                 }
                             }
                             
@@ -434,7 +434,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
                                         element.value = "vazio";
                                     });
                                     input_foto.value = "";
-                                    img_foto.setAttribute("src", "../../imgs/3x4_vazio/placeholder-3x4.jpg");
+                                    img_foto.setAttribute("src", "../../../imgs/3x4_vazio/placeholder-3x4.jpg");
                                     divTel.innerHTML = "";
                                     divTel.classList.add("ocultaDivTels");
                                     // if(titulo_janela.includes("Colaborador")) 
@@ -490,7 +490,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
             input_userName.value = res[0].s_user_name;
             input_nivelAcesso.value = res[0].id_t_nivelUsuario;
             input_status.value = res[0].c_status_usuario;
-            res[0].s_foto_usuario =="#" ? img_foto.src = "../../imgs/3x4_vazio/placeholder-3x4.jpg" : img_foto.src = res[0].s_foto_usuario;
+            res[0].s_foto_usuario =="#" ? img_foto.src = "../../../imgs/3x4_vazio/placeholder-3x4.jpg" : img_foto.src = res[0].s_foto_usuario;
 
             nomeColaborador = res[0].s_nome;
             nameUser = res[0].s_user_name;
@@ -554,7 +554,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
             {
                 if( img_foto.src.slice(img_foto.src.length-1, img_foto.src.length)=="#")
                 {
-                    img_foto.src = "../../imgs/3x4_vazio/placeholder-3x4.jpg";
+                    img_foto.src = "../../../imgs/3x4_vazio/placeholder-3x4.jpg";
                 }
 
                 const menssagem = "Nenhuma Informação alterada. Dados não atualizado.";
@@ -740,7 +740,7 @@ export function janelaSobreposta_colaborador(titulo_janela, editavel, id)
             //div quevonstará o botão excluir
             const delTelefone = document.createElement("img");
             delTelefone.setAttribute("style", "background-color: tomato; width: 15px; border-radius: 0px 4px 4px 0px; cursor: pointer;");
-            delTelefone.setAttribute("src", "../../imgs/delete.svg");
+            delTelefone.setAttribute("src", "../../../imgs/delete.svg");
 
             //caso o telefone excluído seja um telefone que tenha um ID, então o array "delTelefone" receberá tal número para ser usado posteriormente em um novo telefone informado, ou para ser usado na query de exclusão do número com tal ID no banco de dados
             delTelefone.addEventListener("click", (evt) =>
@@ -826,7 +826,7 @@ export function janelaSobreposta_visualizarColaborador(titulo_janela, id)
     const botaoClose = document.createElement("img");
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -863,7 +863,7 @@ export function janelaSobreposta_visualizarColaborador(titulo_janela, id)
     //***************************************************//
     //div da foto do colaborador
     const img_foto = document.createElement("img");
-    img_foto.setAttribute("src", "../../imgs/3x4_vazio/placeholder-3x4.jpg");
+    img_foto.setAttribute("src", "../../../imgs/3x4_vazio/placeholder-3x4.jpg");
     img_foto.setAttribute("title","Foto colaborador");
     img_foto.setAttribute("id","id_campo-foto-operador");
     img_foto.setAttribute("class","img-foto");
@@ -945,7 +945,7 @@ export function janelaSobreposta_visualizarColaborador(titulo_janela, id)
         if( res[1][0].s_foto_usuario == "#" )
         {
             img_foto.setAttribute("style", "margin-top: auto; margin-bottom: auto; border: 2px solid #fdd");
-            img_foto.src = "../../imgs/foto_avatar/avatar.svg";
+            img_foto.src = "../../../imgs/foto_avatar/avatar.svg";
         } 
         else { img_foto.src = res[1][0].s_foto_usuario }
 
@@ -993,7 +993,7 @@ export function janelaSobreposta_fornecedor(titulo_janela, editavel, id)
     const botaoClose = document.createElement("img");
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -1643,7 +1643,7 @@ export function janelaSobreposta_contatoRepresOuFornec(titulo_janela, id)
     const botaoClose = document.createElement("img");
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -1880,7 +1880,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
     const botaoClose = document.createElement("img")
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -1926,7 +1926,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
         divInfoCodigo.setAttribute("style", "display: flex; flex-direction: column; width: 80%;");
         divCodigo.setAttribute("style", "display: flex; width: 50%;");
         btn_alterarCod.setAttribute("class", "imagens");
-        btn_alterarCod.setAttribute("src", "../../imgs/editDesabled.svg");
+        btn_alterarCod.setAttribute("src", "../../../imgs/editDesabled.svg");
         btn_alterarCod.setAttribute("style", "background-color: #fff; border-radius: 4px; border: 2px solid #aaa");
         divCodigo.appendChild(btn_alterarCod);
     }
@@ -2128,7 +2128,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
     divCampos.appendChild(input_foto);
 
     const img_foto = document.createElement("img");
-    img_foto.setAttribute("src", "../../imgs/produto_vazio/img_em_branco.png");
+    img_foto.setAttribute("src", "../../../imgs/produto_vazio/img_em_branco.png");
     // img_foto.style.display = "none";
     img_foto.setAttribute("title","Foto produto");
     img_foto.setAttribute("id","id_campo-foto-produto");
@@ -2144,7 +2144,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
     {  
         if(!img_foto.src.includes("imgs/produto_vazio/img_em_branco.png"))
         {
-            img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+            img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
             input_foto.value = "";
         }
     })
@@ -2332,7 +2332,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
             input_classeProduto.value = res[0].id_t_classe_produto;
             input_status.value = res[0].c_status_produto;
             input_fornecedor.value = res[0].id_t_fornecedor;
-            res[0].s_foto_produto == "#" ? img_foto.src = "../../imgs/produto_vazio/img_em_branco.png" : img_foto.src = res[0].s_foto_produto;
+            res[0].s_foto_produto == "#" ? img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png" : img_foto.src = res[0].s_foto_produto;
 
             codigo = res[0].n_codigo_produto;
             quantidade = res[0].n_qnt_produto;
@@ -2353,7 +2353,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
             //verificar se os contatos que vieram na requisição ao banco de dados são iguais aos informados na area de contatos.
             if( input_codigo.value == codigo && input_quantidade.value == quantidade && input_descricao.value == descricao && input_classeProduto.value == classe && input_status.value == status && input_fornecedor.value == fornecedor && (img_foto.getAttribute("src") == src_foto))
             {
-                img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+                img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
                 const menssagem = "Nenhuma Informação foi alterada. Dados não atualizado.";
                 Cxmsg.mostrar_caixa_menssagem(configAtencao, tituloAtencao, menssagem);
             }
@@ -2392,7 +2392,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
                             Cxmsg.mostrar_caixa_menssagem(configAtencao, tituloAtencao, menssagem);
                             if ( (img_foto.src.slice(img_foto.src.length-1, img_foto.src.length) == "#") ) 
                             {
-                                img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+                                img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
                             }
                             //fim verificação duplicidade nome produto
                             //===========================================================================================================
@@ -2441,7 +2441,7 @@ export function janelaSobreposta_produtos(titulo_janela, editavel, id)
                                         Cxmsg.mostrar_caixa_menssagem(configOk, tituloOk, menssagem);
                                         if ( (img_foto.src.slice(img_foto.src.length-1, img_foto.src.length) == "#") ) 
                                         {
-                                            img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+                                            img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
                                         }
                                     }
                                     else
@@ -2498,7 +2498,7 @@ export function janelaSobreposta_estoque(titulo_janela, id,)
     const botaoClose = document.createElement("img");
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
     barraTitulo.appendChild(botaoClose);
     //***************************************************//
@@ -2969,7 +2969,7 @@ export function janelaSobreposta_novaSenha(titulo_janela, user_name)
     const botaoClose = document.createElement("img");
     botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
     botaoClose.setAttribute("id","id_botaoClose");
-    botaoClose.setAttribute("src","../../imgs/close.svg");
+    botaoClose.setAttribute("src","../../../imgs/close.svg");
     botaoClose.addEventListener("click", () => 
     {
         //caso a tela de nova senha seja aberta, então irá ocultar a janalea de login

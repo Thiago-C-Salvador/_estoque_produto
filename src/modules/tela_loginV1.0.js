@@ -1,6 +1,6 @@
 import { lengthMaxInput } from "../function/apoio.js";
 import Cxmsg from "./caixaMenssagem.js";
-import { janelaSobreposta_novaSenha } from "../views/janelaSobreposta.js";
+import { janelaSobreposta_novaSenha } from "./janelaSobreposta.js";
 
 class Login{
 

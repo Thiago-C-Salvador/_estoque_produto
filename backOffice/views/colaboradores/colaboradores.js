@@ -1,7 +1,7 @@
-import { contemOverflow, regraNome, regra_input_somente_digitos } from "../../src/function/apoio.js";
-import { pesquisaBusca, buscarNome, exibirTodaDGV, checkBoxPesquisa, sessao_usuario } from "../../src/function/pertinentes.js";
-import { janelaSobreposta_colaborador } from "../../src/views/janelaSobreposta.js";
-import { dataGridView_colaborador } from "../../src/modules/dataGridView.js";
+import { contemOverflow, regraNome, regra_input_somente_digitos } from "../../../src/function/apoio.js";
+import { pesquisaBusca, buscarNome, exibirTodaDGV, checkBoxPesquisa, sessao_usuario } from "../../../src/function/pertinentes.js";
+import { janelaSobreposta_colaborador } from "../../../src/modules/janelaSobreposta.js";
+import { dataGridView_colaborador } from "../../../src/modules/dataGridView.js";
 
 //se o login ocorrer com sucesso é gerado a ssesionStorage "teste logado" com seu par "ok", assim libera a navegação dentro da aplicação
 if(sessionStorage.getItem("teste logado") == "ok")

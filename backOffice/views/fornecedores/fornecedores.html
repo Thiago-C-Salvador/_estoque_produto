@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colaborador - BackOffice</title>
-    <link rel="stylesheet" type="text/css" href="../../src/style/geral.css">
-    <link rel="stylesheet" type="text/css" href="colaboradores.css">
-    <script src="colaboradores.js" type="module" defer></script>
+    <title>Fornecedor - BackOffice</title>
+    <link rel="stylesheet" type="text/css" href="../../../src/style/geral.css">
+    <link rel="stylesheet" type="text/css" href="fornecedores.css">
+    <script src="fornecedores.js" type="module" defer></script>
 </head>
 <body>
     <!--as tags de ancora "a" é importante para o funcionamento da contagem do tempo de ociosidade, que é executado através do método "sessao_usuario", desenvolvido dentro do arquivo partinenste.js-->
     <a></a>
-    
+
     <!--Título da janela dentro do body-->
     <div id="id_cabecalho-janela" class="cabecalho-janela">
-        <div>Colaboradores</div>
+        <div>Fornecedor</div>
     </div>
-        
+
         <div id="id_div-area-busca" class="funcoes-e-busca">
             <!--bloco com os campos e botões para realizar buscas-->
             <div id="id_div-busca" class="area-de-busca">
@@ -48,12 +48,12 @@
             <!--elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
             <div class= "btns-principais"> 
                 <div class="divisao-btns-principais">
-                    <img src="../../imgs/add.svg" class="btn-principais-operacoes" title="Adicionar colaborador" id="id_add-novo"/>
-                    <img src="../../imgs/todos.svg" class="btn-principais-operacoes" title="Listar todos (ativos e inativos)" id="id_listar-ColabCadastrados"/>
+                    <img src="../../../imgs/add.svg" class="btn-principais-operacoes" title="Adicionar fornecedor" id="id_add-novo"/>
+                    <img src="../../../imgs/todos.svg" class="btn-principais-operacoes" title="Listar todos (ativos e inativos)" id="id_listar-FornCadastrados"/>
                 </div>
                 <div class="divisao-btns-principais">
-                    <img src="../../imgs/list_all.svg" class="btn-principais-operacoes" title="Listar todos" id="id_listar-todos"/>
-                    <img src="../../imgs/refresh.svg" class="btn-principais-operacoes" title="Atualizar lista" id="id_atualizar-lista"/>
+                    <img src="../../../imgs/list_all.svg" class="btn-principais-operacoes" title="Listar todos ativos" id="id_listar-todos"/>
+                    <img src="../../../imgs/refresh.svg" class="btn-principais-operacoes" title="Atualizar lista" id="id_atualizar-lista"/>
                 </div>
             </div>
             <!--fim elemento com botões "adicionar", "atualizar", "exibir ativos", "exibir todo"-->
@@ -63,11 +63,11 @@
     <div id="id_grid" class="grid">
         <!--Titulo das colunas da grid-->
         <div id="id_titulos-coluna-grid" class="titulos-coluna-grid">
-            <div class="c1">Id</div>
-            <div class="c2">Nome</div>
-            <div class="c3">Nível</div>
-            <div class="c4">Status</div>
-            <div class="c5">Operações</div>
+            <div class="cf1">Id</div>
+            <div class="cf2">Nome</div>
+            <div class="cf3">Contato(s)</div>
+            <div class="cf4">Status</div>
+            <div class="cf5">Operações</div>
         </div>
         <!--fim titulo conluas grid-->
         <div id="id_div-pai-dados-grid" class="div-pai-dados-grid">

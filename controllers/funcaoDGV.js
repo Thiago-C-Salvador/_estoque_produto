@@ -1,6 +1,6 @@
-import { janelaSobreposta_colaborador, janelaSobreposta_fornecedor, janelaSobreposta_produtos } from "../src/views/janelaSobreposta.js";
-import { janelaSobreposta_visualizarColaborador, janelaSobreposta_contatoRepresOuFornec } from "../src/views/janelaSobreposta.js";
-import { janelaSobreposta_estoque } from "../src/views/janelaSobreposta.js";
+import { janelaSobreposta_colaborador, janelaSobreposta_fornecedor, janelaSobreposta_produtos } from "../src/modules/janelaSobreposta.js";
+import { janelaSobreposta_visualizarColaborador, janelaSobreposta_contatoRepresOuFornec } from "../src/modules/janelaSobreposta.js";
+import { janelaSobreposta_estoque } from "../src/modules/janelaSobreposta.js";
 import { dataGridView_colaborador, dataGridView_fornecedor } from "../src/modules/dataGridView.js";
 import Cxmsg from "../src/modules/caixaMenssagem.js";
 
@@ -95,11 +95,11 @@ function imgBotaoStatus (configStatus, divPai, status, endPoint)
 
     if(status == "A")
     {
-        imgVisibility.setAttribute("src", "../../imgs/toggle_on.svg");
+        imgVisibility.setAttribute("src", "../../../imgs/toggle_on.svg");
     }
     else
     {
-        imgVisibility.setAttribute("src", "../../imgs/toggle_off.svg");
+        imgVisibility.setAttribute("src", "../../../imgs/toggle_off.svg");
     }
 
     imgVisibility.setAttribute("title", configStatus.title)
@@ -137,7 +137,7 @@ function imgBotaoStatus (configStatus, divPai, status, endPoint)
                     {
                         colunaStatus = evt.target.parentNode.parentNode.children[3].innerHTML = "A";
                     }
-                    imgVisibility.setAttribute("src", "../../imgs/toggle_on.svg");
+                    imgVisibility.setAttribute("src", "../../../imgs/toggle_on.svg");
                 }
                 else
                 {
@@ -149,7 +149,7 @@ function imgBotaoStatus (configStatus, divPai, status, endPoint)
                     {
                         colunaStatus = evt.target.parentNode.parentNode.children[3].innerHTML = "I";
                     }
-                    imgVisibility.setAttribute("src", "../../imgs/toggle_off.svg");
+                    imgVisibility.setAttribute("src", "../../../imgs/toggle_off.svg");
                 }
 
                 const dados =

@@ -1,4 +1,4 @@
-import Login from "../../src/modules/loginV1.0.js";
+import Login from "./tela_loginV1.0.js";
 
 let servidor = null;
 

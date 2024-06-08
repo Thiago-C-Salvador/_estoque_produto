@@ -1,7 +1,7 @@
-import { contemOverflow, regra_input_somente_digitos, inputNumerosLetras } from "../../src/function/apoio.js";
-import { buscarNome, exibirTodaDGV, buscarCodigo, filtroClasse, sessao_usuario } from "../../src/function/pertinentes.js";
-import { janelaSobreposta_produtos } from "../../src/views/janelaSobreposta.js";
-import { dataGridView_produtos } from "../../src/modules/dataGridView.js";
+import { contemOverflow, regra_input_somente_digitos, inputNumerosLetras } from "../../../src/function/apoio.js";
+import { buscarNome, exibirTodaDGV, buscarCodigo, filtroClasse, sessao_usuario } from "../../../src/function/pertinentes.js";
+import { janelaSobreposta_produtos } from "../../../src/modules/janelaSobreposta.js";
+import { dataGridView_produtos } from "../../../src/modules/dataGridView.js";
 
 //se o login ocorrer com sucesso é gerado a ssesionStorage "teste logado" com seu par "ok", assim libera a navegação dentro da aplicação
 if(sessionStorage.getItem("teste logado") == "ok")

@@ -1,6 +1,6 @@
 const btn_engrenagem = document.getElementById("id_btn-engrenagem");
 
-export function bloco_informacoes_usuario()
+export function box_usuario()
 {       
         //Início da criação da janela sobreposta
         const estilo_viewSobreposta = 'background-color: rgba(0, 0, 0, 0.1); position: absolute; left: 0px; top: 0px; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: start; align-items: end;';

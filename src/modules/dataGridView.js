@@ -63,7 +63,7 @@ export const dataGridView_colaborador = (endPoint) =>
             const configBotaoStatus =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/toggle_off.svg",
+                url_img: "../../../imgs/toggle_off.svg",
                 title: "Ativar/Desativar colaborador"
             }
             statusColaborador(configBotaoStatus, colunaFuncoes, element.c_status_usuario)
@@ -73,7 +73,7 @@ export const dataGridView_colaborador = (endPoint) =>
             const configBotaoVisualizar =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/info_contato.svg",
+                url_img: "../../../imgs/info_contato.svg",
                 title: "Contato Colaborador"
             }
             contatoColaborador(configBotaoVisualizar, colunaFuncoes)
@@ -83,7 +83,7 @@ export const dataGridView_colaborador = (endPoint) =>
             const configBotaoEditar =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/edit.svg",
+                url_img: "../../../imgs/edit.svg",
                 title: "Editar colaborador"
             }
             editarColaborador(configBotaoEditar, colunaFuncoes)
@@ -93,7 +93,7 @@ export const dataGridView_colaborador = (endPoint) =>
             const configBotaoDelete =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/delete.svg",
+                url_img: "../../../imgs/delete.svg",
                 title: "Deletar colaborador"
             }
             deletarColaborador(configBotaoDelete, colunaFuncoes)
@@ -194,7 +194,7 @@ function gridFornecedores(element)
         const configBotaoStatus =
         {
             nome_class: "imagens",
-            url_img: "../../imgs/toggle_off.svg",
+            url_img: "../../../imgs/toggle_off.svg",
             title: "Ativar/Desativar fornecedor"
         }
         statusFornecedor(configBotaoStatus, colunaFuncoes, element.c_status);
@@ -204,7 +204,7 @@ function gridFornecedores(element)
         const configBotaoVisualizar =
         {
             nome_class: "imagens",
-            url_img: "../../imgs/info_contato.svg",
+            url_img: "../../../imgs/info_contato.svg",
             title: "Contato representante"
         }
         visualizarRepresentante(configBotaoVisualizar, colunaFuncoes);
@@ -214,7 +214,7 @@ function gridFornecedores(element)
         const configBotaoEditar =
         {
             nome_class: "imagens",
-            url_img: "../../imgs/edit.svg",
+            url_img: "../../../imgs/edit.svg",
             title: "Editar fornecedor"
         }
         editarFornecedor(configBotaoEditar, colunaFuncoes);
@@ -224,7 +224,7 @@ function gridFornecedores(element)
         const configBotaoDelete =
         {
             nome_class: "imagens",
-            url_img: "../../imgs/delete.svg",
+            url_img: "../../../imgs/delete.svg",
             title: "Deletar fornecedor"
         }
         deletarFornecedor(configBotaoDelete, colunaFuncoes);
@@ -299,7 +299,7 @@ export const dataGridView_produtos = (endPoint) =>
                 const botaoClose = document.createElement("img")
                 botaoClose.setAttribute("class", 'botaoClose_barraTitulo');
                 botaoClose.setAttribute("id","id_botaoClose");
-                botaoClose.setAttribute("src","../../imgs/close.svg");
+                botaoClose.setAttribute("src","../../../imgs/close.svg");
                 botaoClose.addEventListener("click",()=>{ viewSobreposta.remove() });
                 barraTitulo.appendChild(botaoClose);
                 //***************************************************//
@@ -365,7 +365,7 @@ export const dataGridView_produtos = (endPoint) =>
             const configBotaoStatus =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/toggle_off.svg",
+                url_img: "../../../imgs/toggle_off.svg",
                 title: "Ativar/Desativar produto"
             }
             statusProduto(configBotaoStatus, colunaFuncoes, element.c_status_produto);
@@ -374,7 +374,7 @@ export const dataGridView_produtos = (endPoint) =>
             const configBotaoVisualizar =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/info_contato.svg",
+                url_img: "../../../imgs/info_contato.svg",
                 title: "Dados Fornecedor",
                 id_fornecedor: element.id_t_fornecedor
             }
@@ -384,7 +384,7 @@ export const dataGridView_produtos = (endPoint) =>
             const configBotaoEditar =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/edit.svg",
+                url_img: "../../../imgs/edit.svg",
                 title: "Editar produto"
             }
             editarProduto(configBotaoEditar, colunaFuncoes);
@@ -393,7 +393,7 @@ export const dataGridView_produtos = (endPoint) =>
             const configBotaoMovimentar =
             {
                 nome_class: "imagens",
-                url_img: "../../imgs/movimentacao.svg",
+                url_img: "../../../imgs/movimentacao.svg",
                 title: "Entrada/Saída estoque"
             }
             entradaSaida(configBotaoMovimentar, colunaFuncoes);

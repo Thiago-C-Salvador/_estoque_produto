@@ -637,7 +637,7 @@ export function verificaCadastroProduto(input_codigo, dados, input_foto, img_fot
 
                     if( img_foto.src.slice(img_foto.src.length-1, img_foto.src.length)=="#" )
                     {
-                        img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+                        img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
                     }
                 }
                 
@@ -665,7 +665,7 @@ export function verificaCadastroProduto(input_codigo, dados, input_foto, img_fot
                     let menssagem = "Produto cadastrado com sucesso!";
                     if(editavel) menssagem = "Produto atualizado com sucesso!"
                     Cxmsg.mostrar_caixa_menssagem(configOk, tituloOk, menssagem);
-                    img_foto.src = "../../imgs/produto_vazio/img_em_branco.png";
+                    img_foto.src = "../../../imgs/produto_vazio/img_em_branco.png";
                     funcaoDGV()
                     return
                 }
@@ -788,7 +788,7 @@ function desloga(nivel_navegacao)
     }
     if(nivel_navegacao == 2)
     {
-        window.open("","_top").open(window.location.href="../../index.html", "_self")
+        window.open("","_top").open(window.location.href="../../../index.html", "_self")
     }
 } 
 
